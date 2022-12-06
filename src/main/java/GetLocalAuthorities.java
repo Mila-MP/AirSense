@@ -46,6 +46,7 @@ public class GetLocalAuthorities{
             String authorityName = album.getString("@LocalAuthorityName");
             sb2.append(authorityCode + ": "+ authorityName + "\n");
         }
+
         String finalString = sb2.toString();
         return finalString;
     }

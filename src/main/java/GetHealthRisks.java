@@ -46,8 +46,10 @@ public class GetHealthRisks {
             String speciesName = album.getString("@SpeciesName");
             String speciesRisk = album.getString("@HealthEffect");
             sb2.append(speciesName + ": "+ speciesRisk + "\n");
+
         }
         String finalString = sb2.toString();
+
         return finalString;
     }
 

@@ -18,8 +18,8 @@ public class Main {
         User user1 = new User("Asthma Sufferer","20","F",inhaler1, loc1);
         GetSpecies species = new GetSpecies();
         GetLocalAuthorities la = new GetLocalAuthorities();
-        GetHealthRisks hr = new GetHealthRisks();
-        System.out.println(hr.print());
+
+
         System.out.println(species.print());
         System.out.println(la.print());
     }
