@@ -12,14 +12,9 @@ public class PollutionInfo {
     JLabel welcome = new JLabel("Welcome to AirSense");
     JLabel question = new JLabel("What do you want to know?");
     JButton okButton = new JButton(("OK"));
-
     JLabel species = new JLabel();
-    public PollutionInfo() throws IOException {
-        mainPanel.setLayout(new GridLayout(3,1));
-        panel1.setLayout(new GridLayout(1,1));
-        panel2.setLayout(new GridLayout(1,3));
-        panel3.setLayout(new GridLayout(1,1));
 
+    public PollutionInfo() throws IOException {
         panel1.add(welcome);
 
         panel2.add(question);
@@ -39,9 +34,9 @@ public class PollutionInfo {
             public void mouseClicked(MouseEvent e) {
                 String choice = cb.getItemAt(cb.getSelectedIndex());
                 if (choice == "The different types of pollutants") {
-                    get info = new get("http://api.erg.ic.ac.uk/AirQuality/Information/Species/Json");
                     try {
-                        species.setText(info.getInfo());
+                        GetSpecies info = new GetSpecies();
+                        species.setText(info.print());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
