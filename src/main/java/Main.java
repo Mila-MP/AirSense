@@ -1,3 +1,4 @@
+
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.*;
 import java.io.IOException;
@@ -18,8 +19,10 @@ public class Main {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
         PollutionIndex page = new PollutionIndex();
         frame.add(page);
+
     }
 
 }

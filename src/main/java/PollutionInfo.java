@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,7 +16,7 @@ public class PollutionInfo extends JPanel{
 
     public PollutionInfo() throws IOException {
         setLayout(new GridBagLayout());
-        String[] choices = {"The different types of pollutants", "The pollution levels in my current location"};
+        String[] choices = {"The different types of pollutants", "The pollution levels in my current location","health effects of different pollutants"};
         JComboBox<String> cb = new JComboBox<>(choices);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -35,15 +36,26 @@ public class PollutionInfo extends JPanel{
         gbc.gridx = 0;
         gbc.gridy = 3;
         add(species,gbc);
+
         okButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String choice = cb.getItemAt(cb.getSelectedIndex());
-                if (choice == "The different types of pollutants") {
+                if (choice == "health effects of different pollutants") {
                     try {
                         GetSpecies info = new GetSpecies();
                         species.setVisible(true);
                         species.setText(convertToMultiline(info.print()));
+                        GetHealthRisks risks = new GetHealthRisks();
+                        String healthInfo = risks.print();
+
+
+                        mainPanel.add(area);
+                        area.setBorder(new LineBorder(Color.BLACK));
+                        area.setWrapStyleWord(true);
+                        area.setLineWrap(true);
+                        area.setText(healthInfo);
+
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -99,8 +111,10 @@ public class PollutionInfo extends JPanel{
         });
 
     }
+
     public static String convertToMultiline(String orig)
     {
         return "<html>" + orig.replaceAll("\n", "<br>");
+
     }
 }
