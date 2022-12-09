@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Added classes">
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Data fetching Mila">
+      <change afterPath="$PROJECT_DIR$/src/main/java/InhalerUse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PollutionIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetLocalAuthorities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetLocalAuthorities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetPollutionIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetPollutionIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +90,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -90,9 +99,6 @@
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Mila Pertuy\OneDrive - Imperial College London\3rd Year\BIOE60010 Programming 3\AirSense\AirSense\src\main\java" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -144,6 +150,8 @@
       <list>
         <item itemvalue="Gradle.AirSense [run]" />
         <item itemvalue="Gradle.AirSense [build]" />
+        <item itemvalue="Gradle.AirSense [run]" />
+        <item itemvalue="Gradle.AirSense [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -160,28 +168,15 @@
       <workItem from="1669765184365" duration="229000" />
       <workItem from="1670162204362" duration="1999000" />
       <workItem from="1670180817948" duration="2692000" />
-      <workItem from="1670183819955" duration="7228000" />
-      <workItem from="1670243753292" duration="100000" />
-      <workItem from="1670246886924" duration="620000" />
-      <workItem from="1670316001149" duration="1726000" />
-      <workItem from="1670321368051" duration="6174000" />
-      <workItem from="1670338863350" duration="3128000" />
+      <workItem from="1670183819955" duration="6761000" />
+      <workItem from="1670352627945" duration="8791000" />
+      <workItem from="1670452324366" duration="6559000" />
+      <workItem from="1670494236642" duration="6362000" />
+      <workItem from="1670503295825" duration="19201000" />
+      <workItem from="1670577928885" duration="3401000" />
+      <workItem from="1670587312736" duration="24000" />
+      <workItem from="1670605512637" duration="447000" />
     </task>
-    <task id="LOCAL-00001" summary="Pollution info">
-      <created>1670196735141</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1670196735141</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Added classes">
-      <created>1670342418483</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1670342418484</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,15 +187,28 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Data-fetching-Mila" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Pollution info" />
-    <MESSAGE value="Added classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added classes" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AirSense$AirSense__run_.ic" NAME="AirSense [run] Coverage Results" MODIFIED="1670528814529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
