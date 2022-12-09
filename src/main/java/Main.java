@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.io.IOException;
 
@@ -17,6 +18,8 @@ public class Main {
         User user1 = new User("Asthma Sufferer","20","F",inhaler1, loc1);
         GetSpecies species = new GetSpecies();
         GetLocalAuthorities la = new GetLocalAuthorities();
+
+
         System.out.println(species.print());
         System.out.println(la.print());
     }

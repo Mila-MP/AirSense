@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Pollution info">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GetLocalAuthorities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GetPollutionIndex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GetSpecies.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Location.java" afterDir="false" />
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="displays health risks on the frame">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Get.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Inhaler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhaler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetNews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetNews.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +66,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Data-fetching" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,13 +88,11 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/Tutorial 4/ShapeApp/ShapeApp&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Prg3/AirSensePractice&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Mila Pertuy\OneDrive - Imperial College London\3rd Year\BIOE60010 Programming 3\AirSense\AirSense\src\main\java" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -169,21 +160,30 @@
       <workItem from="1669765184365" duration="229000" />
       <workItem from="1670162204362" duration="1999000" />
       <workItem from="1670180817948" duration="2692000" />
-      <workItem from="1670183819955" duration="7228000" />
-      <workItem from="1670243753292" duration="100000" />
-      <workItem from="1670246886924" duration="620000" />
-      <workItem from="1670316001149" duration="1726000" />
-      <workItem from="1670321368051" duration="6174000" />
-      <workItem from="1670338863350" duration="1875000" />
+      <workItem from="1670183819955" duration="6761000" />
     </task>
-    <task id="LOCAL-00001" summary="Pollution info">
-      <created>1670196735141</created>
+    <task id="LOCAL-00001" summary="to appear on github">
+      <created>1670343935156</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1670196735141</updated>
+      <updated>1670343935156</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added GetHealthRisks class that prints out the health risk for each pollutant">
+      <created>1670346002628</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670346002628</updated>
+    </task>
+    <task id="LOCAL-00003" summary="displays health risks on the frame">
+      <created>1670365684433</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670365684433</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,14 +194,43 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Pollution info" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pollution info" />
+    <MESSAGE value="to appear on github" />
+    <MESSAGE value="Added GetHealthRisks class that prints out the health risk for each pollutant" />
+    <MESSAGE value="displays health risks on the frame" />
+    <option name="LAST_COMMIT_MESSAGE" value="displays health risks on the frame" />
   </component>
 </project>
