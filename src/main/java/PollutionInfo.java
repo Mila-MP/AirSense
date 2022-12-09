@@ -5,9 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-
-
-
 public class PollutionInfo {
 
     JPanel mainPanel = new JPanel();
@@ -65,12 +62,6 @@ public class PollutionInfo {
                         area.setWrapStyleWord(true);
                         area.setLineWrap(true);
                         area.setText(healthInfo);
-
-
-
-
-
-
 
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
