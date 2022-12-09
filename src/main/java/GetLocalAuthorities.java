@@ -50,5 +50,4 @@ public class GetLocalAuthorities{
         String finalString = sb2.toString();
         return finalString;
     }
-
 }
