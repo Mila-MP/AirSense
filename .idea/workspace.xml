@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/inserting_data.java" afterDir="false" />
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Inhaler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhaler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
@@ -111,7 +111,24 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="AirSense.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="41e9b746-03e0-4522-b5d6-3fcce62980a5.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="41e9b746-03e0-4522-b5d6-3fcce62980a5.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
+    <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/41e9b746-03e0-4522-b5d6-3fcce62980a5/console.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
     <configuration name="AirSense [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -156,6 +173,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.AirSense [build]" />
         <item itemvalue="Gradle.AirSense [run]" />
       </list>
@@ -186,8 +204,16 @@
       <workItem from="1670409824384" duration="54000" />
       <workItem from="1670498654233" duration="17000" />
       <workItem from="1670606173748" duration="527000" />
-      <workItem from="1670776269594" duration="5523000" />
+      <workItem from="1670776269594" duration="18779000" />
     </task>
+    <task id="LOCAL-00001" summary="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler">
+      <created>1670782053600</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670782053600</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,5 +229,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler" />
+    <option name="LAST_COMMIT_MESSAGE" value="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler" />
   </component>
 </project>

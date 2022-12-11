@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, SQLException {
+
+    public static void main(String[] args) throws Exception {
         JFrame frame = new JFrame("AirSense");
         frame.setSize(500, 500);
         frame.setVisible(true);
@@ -19,7 +19,12 @@ public class Main {
         Inhaler myreliever = new Inhaler("reliver", "12/12/12", 200);
         myreliever.add_inhaler();
 
+        myreliever.use_count(3);
+            }
 
-    }
 
-}
+        }
+
+
+
+
