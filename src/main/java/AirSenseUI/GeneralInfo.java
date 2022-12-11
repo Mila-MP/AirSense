@@ -1,23 +1,28 @@
+package AirSenseUI;
+
+import GetData.GetHealthRisks;
+import GetData.GetSpecies;
+
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-public class PollutionInfo extends JPanel{
+public class GeneralInfo extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
     JLabel welcome = new JLabel("Welcome to AirSense");
     JLabel question = new JLabel("What do you want to know?");
+    JLabel info = new JLabel();
     JButton okButton = new JButton("OK");
     JButton clearButton = new JButton("Clear");
-    JLabel species = new JLabel();
 
-
-    public PollutionInfo() throws IOException {
-        setLayout(new GridBagLayout());
-        String[] choices = {"The different types of pollutants", "The pollution levels in my current location","health effects of different pollutants"};
+    public GeneralInfo(){
+        String[] choices = {"The different types of pollutants","Health effects of the different pollutants"};
         JComboBox<String> cb = new JComboBox<>(choices);
+        welcome.setFont(new Font("Monospaced",Font.PLAIN,18));
+
+        setLayout(new GridBagLayout());
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(welcome,gbc);
@@ -35,30 +40,34 @@ public class PollutionInfo extends JPanel{
         add(clearButton,gbc);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        add(species,gbc);
+        add(info,gbc);
 
         okButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String choice = cb.getItemAt(cb.getSelectedIndex());
-                if (choice == "health effects of different pollutants") {
+                if (choice == "Health effects of the different pollutants") {
                     try {
-                        GetSpecies info = new GetSpecies();
-                        species.setVisible(true);
-                        species.setText(convertToMultiline(info.print()));
                         GetHealthRisks risks = new GetHealthRisks();
                         String healthInfo = risks.print();
-
-
-                        mainPanel.add(area);
-                        area.setBorder(new LineBorder(Color.BLACK));
-                        area.setWrapStyleWord(true);
-                        area.setLineWrap(true);
-                        area.setText(healthInfo);
+                        info.setVisible(true);
+                        info.setText(convertToMultiline(healthInfo));
 
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                }
+                else if (choice == "The different types of pollutants"){
+                    try {
+                        GetSpecies a = new GetSpecies();
+                        String species = a.print();
+
+                        info.setVisible(true);
+                        info.setText(convertToMultiline(species));
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
                 }
             }
 
@@ -86,7 +95,7 @@ public class PollutionInfo extends JPanel{
         clearButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                species.setVisible(false);
+                info.setVisible(false);
             }
 
             @Override
@@ -109,9 +118,7 @@ public class PollutionInfo extends JPanel{
 
             }
         });
-
     }
-
     public static String convertToMultiline(String orig)
     {
         return "<html>" + orig.replaceAll("\n", "<br>");

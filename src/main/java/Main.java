@@ -1,5 +1,6 @@
-
+import AirSenseUI.UI;
 import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.swing.*;
 import java.io.IOException;
 
@@ -15,12 +16,12 @@ public class Main {
 
         // Creates frame
         JFrame frame= new JFrame("AirSense");
-        frame.setSize(500,500);
+        frame.setSize(1000,500);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        PollutionIndex page = new PollutionIndex();
+        UI page = new UI();
         frame.add(page);
 
     }

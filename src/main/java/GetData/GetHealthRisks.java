@@ -1,5 +1,8 @@
+package GetData;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,10 +10,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GetSpecies {
+public class GetHealthRisks {
     String responseBody;
 
-    public GetSpecies() throws IOException {
+    public GetHealthRisks() throws IOException {
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/Species/Json");
         // Establish connection
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
@@ -36,19 +39,20 @@ public class GetSpecies {
         responseBody = sb.toString();
     }
 
-        public String print(){
-            responseBody = responseBody.substring(32,responseBody.length()-3);
-            JSONArray albums = new JSONArray(responseBody);
-            StringBuilder sb2 = new StringBuilder();
-            for (int i = 0; i < albums.length(); i++){
-                JSONObject album = albums.getJSONObject(i);
-                String authorityCode = album.getString("@SpeciesCode");
-                String authorityName = album.getString("@SpeciesName");
-                sb2.append(authorityCode + ": "+ authorityName + "\n");
-            }
-            String finalString = sb2.toString();
-            return finalString;
-        }
+    public String print(){
+        responseBody = responseBody.substring(32,responseBody.length()-3);
+        JSONArray albums = new JSONArray(responseBody);
+        StringBuilder sb2 = new StringBuilder();
+        for (int i = 0; i < albums.length(); i++){
+            JSONObject album = albums.getJSONObject(i);
+            String speciesName = album.getString("@SpeciesName");
+            String speciesRisk = album.getString("@HealthEffect");
+            sb2.append(speciesName + ": "+ speciesRisk + "\n");
 
+        }
+        String finalString = sb2.toString();
+
+        return finalString;
+    }
 
 }

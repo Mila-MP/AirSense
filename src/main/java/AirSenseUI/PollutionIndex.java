@@ -1,3 +1,6 @@
+package AirSenseUI;
+import GetData.GetLocalAuthorities;
+import GetData.GetPollutionIndex;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
