@@ -9,6 +9,7 @@ public class UI extends JPanel{
     GeneralInfo infoPanel = new GeneralInfo();
     MyInhalers inhalerPanel = new MyInhalers();
     PollutionIndex pollutionPanel = new PollutionIndex();
+    PollutionNews newsPanel = new PollutionNews();
     PollutionHistory pollutionHistory = new PollutionHistory();
     JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -18,6 +19,7 @@ public class UI extends JPanel{
         tabbedPane.addTab("General Information",infoPanel);
         tabbedPane.addTab("My Inhalers",inhalerPanel);
         tabbedPane.addTab("Pollution Indices",pollutionPanel);
+        tabbedPane.addTab("News",newsPanel);
         tabbedPane.addTab("Pollution History",pollutionHistory);
 
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);

@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Improved UI">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/SolarizedDark.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/SolarizedDark.theme.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionNews.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +179,8 @@
       <workItem from="1670759143314" duration="2139000" />
       <workItem from="1670761336038" duration="17166000" />
       <workItem from="1670785153834" duration="5951000" />
-      <workItem from="1670802499699" duration="3061000" />
+      <workItem from="1670802499699" duration="3387000" />
+      <workItem from="1670840075402" duration="2254000" />
     </task>
     <task id="LOCAL-00001" summary="Pollution info">
       <created>1670196735141</created>
@@ -199,7 +196,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670802828817</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Improved UI">
+      <created>1670805790024</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670805790024</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Improved UI">
+      <created>1670805843686</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670805843686</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
