@@ -4,6 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Improved UI">
+      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionNews.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
     <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler">
       <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
@@ -15,6 +20,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -91,6 +99,11 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/Tutorial 4/ShapeApp/ShapeApp&quot;,
+
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -105,6 +118,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+
+      <recent name="C:\Users\Mila Pertuy\OneDrive - Imperial College London\3rd Year\BIOE60010 Programming 3\AirSense\AirSense\src\main\java\Images" />
+      <recent name="C:\Users\Mila Pertuy\OneDrive - Imperial College London\3rd Year\BIOE60010 Programming 3\AirSense\AirSense\src\main\java" />
+
       <recent name="C:\Year 3\Programming 3\AirSense\src\main\java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -192,6 +209,49 @@
       <workItem from="1669765184365" duration="229000" />
       <workItem from="1670162204362" duration="1999000" />
       <workItem from="1670180817948" duration="2692000" />
+
+      <workItem from="1670183819955" duration="7228000" />
+      <workItem from="1670243753292" duration="100000" />
+      <workItem from="1670246886924" duration="620000" />
+      <workItem from="1670316001149" duration="1726000" />
+      <workItem from="1670321368051" duration="6174000" />
+      <workItem from="1670338863350" duration="1875000" />
+      <workItem from="1670759143314" duration="2139000" />
+      <workItem from="1670761336038" duration="17166000" />
+      <workItem from="1670785153834" duration="5951000" />
+      <workItem from="1670802499699" duration="3387000" />
+      <workItem from="1670840075402" duration="2254000" />
+    </task>
+    <task id="LOCAL-00001" summary="Pollution info">
+      <created>1670196735141</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670196735141</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Improved UI">
+      <created>1670802828817</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670802828817</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Improved UI">
+      <created>1670805790024</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670805790024</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Improved UI">
+      <created>1670805843686</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670805843686</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+
       <workItem from="1670183819955" duration="6761000" />
       <workItem from="1670266754278" duration="17000" />
       <workItem from="1670338937372" duration="1923000" />
@@ -231,6 +291,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Pollution info" />
+    <MESSAGE value="Improved UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved UI" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AirSense$AirSense__run_.ic" NAME="AirSense [run] Coverage Results" MODIFIED="1670528814529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <MESSAGE value="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler" />
     <option name="LAST_COMMIT_MESSAGE" value="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler" />
   </component>
