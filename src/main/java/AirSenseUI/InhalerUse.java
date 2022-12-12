@@ -16,7 +16,7 @@ public class InhalerUse extends JPanel {
 
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
 
     public InhalerUse() throws SQLException {
 

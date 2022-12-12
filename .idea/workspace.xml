@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Improved UI">
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Improved UI"/>
       <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionNews.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
@@ -263,7 +263,7 @@
       <workItem from="1670498654233" duration="17000" />
       <workItem from="1670606173748" duration="527000" />
       <workItem from="1670776269594" duration="20336000" />
-    </task>
+    </component>
     <task id="LOCAL-00001" summary="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler">
       <created>1670782053600</created>
       <option name="number" value="00001" />
@@ -280,7 +280,7 @@
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
+  </project>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>

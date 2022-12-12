@@ -3,6 +3,11 @@ import StoreData.Inhaler;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
@@ -28,16 +33,9 @@ public class Main {
         UI page = new UI();
         frame.add(page);
 
+    }
+}
 
-
-
-
-
-        
-            }
-
-
-        }
 
 
 

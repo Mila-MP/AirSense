@@ -3,10 +3,15 @@ package AirSenseUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.sql.*;
 
 public class MyInhalers extends JPanel{
-
     public JFrame f;
 
     protected JTable inhaler_table;
@@ -15,7 +20,7 @@ public class MyInhalers extends JPanel{
 
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
 
     public MyInhalers() throws SQLException {
 
@@ -45,7 +50,7 @@ public class MyInhalers extends JPanel{
                 String temp_quantity = String.valueOf(rs.getInt("quantity"));
 
                 Object[] row = { temp_type, temp_expiry, temp_quantity};
-                
+
                 data.(row);
             System.out.println(rs.getString("inhaler_type") + rs.getString("expiry_date") + rs.getInt("quantity"));
             } */
