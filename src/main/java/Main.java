@@ -3,6 +3,9 @@ import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
@@ -23,7 +26,19 @@ public class Main {
 
         UI page = new UI();
         frame.add(page);
+        
+        Inhaler myreliever = new Inhaler("reliver", "12/12/12", 200);
+        myreliever.add_inhaler();
 
-    }
+        myreliever.use_count(3);
 
-}
+
+        
+            }
+
+
+        }
+
+
+
+
