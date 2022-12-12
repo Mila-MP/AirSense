@@ -1,4 +1,4 @@
-
+package StoreData;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,10 @@ public class Inhaler {
     public int puffs_left;
     public int puffs_taken;
 
+
+
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
+    // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public Inhaler(String inhaler_type, String expiry, int quantity) throws SQLException {
@@ -89,7 +92,7 @@ public class Inhaler {
 
 
         } finally {
-            if (count > 3){
+            if (count >= 3){
                 System.out.println("Based on NHS guidance it is recommended that you see your doctor about your asthma");
             }
             else{
@@ -103,5 +106,29 @@ public class Inhaler {
 
 }
 
+/* Creating a tables - input this into your query console
+
+        create table inhalers(
+        id serial primary key,
+        inhaler_type varchar(128) NOT NULL,
+        expiry_date varchar(128) NOT NULL,
+        quantity int NOT NULL
+        );
+
+        create table use_data(
+        id serial primary key,
+        use_date DATE NOT NULL DEFAULT CURRENT_DATE,
+        no_of_puffs int NOT NULL
+        );
+
+   /* Table reset
+   TRUNCATE TABLE use_data;
+
+insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '9',3);
+insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '7',2);
+insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '5',1);
+
+TRUNCATE TABLE inhalers;
+ */
 
 
