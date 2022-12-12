@@ -4,24 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Data fetching Mila">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/MyInhalers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Improved UI">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/SolarizedDark.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/SolarizedDark.theme.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Example.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetHealthRisks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetHealthRisks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetLocalAuthorities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetLocalAuthorities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetNews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetNews.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetPollutionIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetPollutionIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetSpecies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetSpecies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PollutionIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,6 +183,7 @@
       <workItem from="1670759143314" duration="2139000" />
       <workItem from="1670761336038" duration="17166000" />
       <workItem from="1670785153834" duration="5951000" />
+      <workItem from="1670802499699" duration="3061000" />
     </task>
     <task id="LOCAL-00001" summary="Pollution info">
       <created>1670196735141</created>
@@ -200,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670196735141</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Improved UI">
+      <created>1670802828817</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670802828817</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +218,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Pollution info" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pollution info" />
+    <MESSAGE value="Improved UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved UI" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AirSense$AirSense__run_.ic" NAME="AirSense [run] Coverage Results" MODIFIED="1670528814529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

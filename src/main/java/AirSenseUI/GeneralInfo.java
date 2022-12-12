@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class GeneralInfo extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
-    JLabel welcome = new JLabel("Welcome to AirSense");
     JLabel question = new JLabel("What do you want to know?");
     JLabel info = new JLabel();
     JButton okButton = new JButton("OK");
@@ -20,26 +19,22 @@ public class GeneralInfo extends JPanel {
     public GeneralInfo(){
         String[] choices = {"The different types of pollutants","Health effects of the different pollutants"};
         JComboBox<String> cb = new JComboBox<>(choices);
-        welcome.setFont(new Font("Monospaced",Font.PLAIN,18));
 
         setLayout(new GridBagLayout());
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(welcome,gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
         add(question,gbc);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 1;
         add(cb,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridx =1;
+        gbc.gridy =1;
         add(okButton,gbc);
         gbc.gridx = 2;
-        gbc.gridy = 2;
+        gbc.gridy = 1;
         add(clearButton,gbc);
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         add(info,gbc);
 
         okButton.addMouseListener(new MouseListener() {

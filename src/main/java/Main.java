@@ -1,5 +1,5 @@
 import AirSenseUI.UI;
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException{
         // Initialises Look and Feel
         try {
-            UIManager.setLookAndFeel( new FlatDarkLaf());
+           UIManager.setLookAndFeel( new FlatSolarizedDarkIJTheme());
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
