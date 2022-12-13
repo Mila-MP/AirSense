@@ -16,11 +16,9 @@ public class MyInhalers extends JPanel{
 
     protected JTable inhaler_table;
 
-    protected JTable use_history;
-
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public MyInhalers() throws SQLException {
 
