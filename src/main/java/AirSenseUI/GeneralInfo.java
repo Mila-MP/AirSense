@@ -12,9 +12,10 @@ import java.io.IOException;
 public class GeneralInfo extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
     JLabel question = new JLabel("What do you want to know?");
-    JLabel info = new JLabel();
     JButton okButton = new JButton("OK");
     JButton clearButton = new JButton("Clear");
+    JLabel info = new JLabel();
+
 
     public GeneralInfo(){
         String[] choices = {"The different types of pollutants","Health effects of the different pollutants"};
@@ -36,6 +37,7 @@ public class GeneralInfo extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 2;
         add(info,gbc);
+
 
         okButton.addMouseListener(new MouseListener() {
             @Override

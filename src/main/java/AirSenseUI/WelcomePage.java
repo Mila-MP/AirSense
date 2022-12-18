@@ -11,8 +11,6 @@ public class WelcomePage extends JPanel {
     JLabel empty1 = new JLabel(convertToMultiline("\n"));
     JLabel empty2 = new JLabel(convertToMultiline("\n"));
     JLabel empty3 = new JLabel(convertToMultiline("\n\n\n"));
-    JSeparator verticalSeparator = new JSeparator(SwingConstants.HORIZONTAL);
-    Color c1 = new Color(125, 194, 181);
     Font title1 = new Font("Ubuntu", Font.BOLD,20);
     Font title2 = new Font("Ubuntu",Font.PLAIN,15);
     Font body = new Font("Ubuntu",Font.PLAIN,13);
