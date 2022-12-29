@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19168346-8033-44b7-b751-199fccac58af" name="Changes" comment="back to data fetching">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/InhalerUse2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/InhalerUse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/InhalerUse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/MyInhalers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/MyInhalers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,18 +82,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/AirSense/AirSense&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/AirSense/AirSense",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -150,6 +147,9 @@
       <list>
         <item itemvalue="Gradle.AirSense [run]" />
         <item itemvalue="Gradle.AirSense [build]" />
+        <item itemvalue="Gradle.AirSense [run]" />
+        <item itemvalue="Gradle.AirSense [build]" />
+        <item itemvalue="Gradle.AirSense [run]" />
       </list>
     </recent_temporary>
   </component>
