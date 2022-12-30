@@ -39,14 +39,14 @@ public class GetLocalAuthorities{
     }
 
     public String print(){
-        responseBody = responseBody.substring(38,responseBody.length()-3);
-        JSONArray albums = new JSONArray(responseBody);
+        JSONObject obj1 = new JSONObject(responseBody);
+        JSONObject obj2 = obj1.getJSONObject("LocalAuthorities");
+        JSONArray arr = obj2.getJSONArray("LocalAuthority");
         StringBuilder sb2 = new StringBuilder();
-        for (int i = 0; i < albums.length(); i++){
-            JSONObject album = albums.getJSONObject(i);
-            String authorityCode = album.getString("@LocalAuthorityCode");
+        for (int i = 0; i < arr.length(); i++){
+            JSONObject album = arr.getJSONObject(i);
             String authorityName = album.getString("@LocalAuthorityName");
-            sb2.append(authorityCode + ": "+ authorityName + "\n");
+            sb2.append(authorityName + "\n");
         }
 
         String finalString = sb2.toString();

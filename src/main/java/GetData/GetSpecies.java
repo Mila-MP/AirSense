@@ -39,16 +39,17 @@ public class GetSpecies {
     }
 
         public String print(){
-            responseBody = responseBody.substring(32,responseBody.length()-3);
-            JSONArray albums = new JSONArray(responseBody);
-            StringBuilder sb2 = new StringBuilder();
-            for (int i = 0; i < albums.length(); i++){
-                JSONObject album = albums.getJSONObject(i);
-                String authorityCode = album.getString("@SpeciesCode");
-                String authorityName = album.getString("@SpeciesName");
-                sb2.append(authorityCode + ": "+ authorityName + "\n");
+            StringBuilder sb = new StringBuilder();
+            JSONObject obj = new JSONObject(responseBody);
+            JSONObject airQualitySpecies = obj.getJSONObject("AirQualitySpecies");
+            JSONArray species = airQualitySpecies.getJSONArray("Species");
+            for (int i = 0; i < species.length(); i++){
+                JSONObject obj2 = species.getJSONObject(i);
+                String authorityCode = obj2.getString("@SpeciesCode");
+                String authorityName = obj2.getString("@SpeciesName");
+                sb.append(authorityCode + ": "+ authorityName + "\n");
             }
-            String finalString = sb2.toString();
+            String finalString = sb.toString();
             return finalString;
         }
 
