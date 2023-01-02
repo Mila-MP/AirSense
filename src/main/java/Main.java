@@ -15,7 +15,7 @@ public class Main {
 
         // Creates frame
         JFrame frame = new JFrame("AirSense");
-        frame.setSize(1000, 600);
+        frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,9 +23,6 @@ public class Main {
         // Puts UI on frame
         UI page = new UI();
         frame.add(page);
-//        GetTest lol = new GetTest(11);
-//        System.out.println(lol.print());
-
     }
 }
 

@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19168346-8033-44b7-b751-199fccac58af" name="Changes" comment="back to data fetching">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GetData/GetPlot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="19168346-8033-44b7-b751-199fccac58af" name="Changes" comment="Added PollutionHistory features, improved GetPollutionIndex">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/InhalerUse2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/InhalerUse2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetData/GetLocalAuthorities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetLocalAuthorities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetData/GetPlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetPlot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GetData/GetPollutionIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetPollutionIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GetData/GetSpecies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetSpecies.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StoreData/Inhaler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StoreData/Inhaler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/get.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetData/GetSite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,8 +187,20 @@
       <workItem from="1672317067918" duration="10842000" />
       <workItem from="1672329999759" duration="729000" />
       <workItem from="1672330735304" duration="1454000" />
-      <workItem from="1672406042200" duration="21230000" />
+      <workItem from="1672406042200" duration="21625000" />
+      <workItem from="1672493251066" duration="20325000" />
+      <workItem from="1672587125672" duration="13616000" />
+      <workItem from="1672683630386" duration="2409000" />
+      <workItem from="1672687399828" duration="3743000" />
     </task>
+    <task id="LOCAL-00001" summary="Added PollutionHistory features, improved GetPollutionIndex">
+      <created>1672431166473</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672431166473</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +219,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Code for presentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code for presentation" />
+    <MESSAGE value="Added PollutionHistory features, improved GetPollutionIndex" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added PollutionHistory features, improved GetPollutionIndex" />
   </component>
 </project>

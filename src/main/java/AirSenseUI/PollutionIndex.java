@@ -4,8 +4,10 @@ import GetData.GetPollutionIndex;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class PollutionIndex extends JPanel{
@@ -13,21 +15,42 @@ public class PollutionIndex extends JPanel{
     JLabel empty1 = new JLabel(convertToMultiline("\n"));
     JLabel empty2 = new JLabel(convertToMultiline("\n"));
     JLabel empty3 = new JLabel(convertToMultiline("\n"));
-    JLabel welcome = new JLabel("On this page, you can find out the pollution levels in your current location or in the areas you want to visit");
-    JLabel choose = new JLabel("Choose the Borough you wish to visit and press \"ok\" to see the latest measurements there");
-    JButton okButton = new JButton("OK");
-    JButton showButton = new JButton("Show me the pollution indices in my current location");
-    JLabel showCurrentLoc = new JLabel();
+    JLabel welcome = new JLabel("On this page, you can find out the pollution levels in the areas you want to visit");
+    JLabel choose = new JLabel("Choose a Borough and a measurement site to see the pollution levels at that location.");
+    JLabel boroughLabel = new JLabel("Borough:");
+    JLabel siteLabel = new JLabel("Measurement site:");
     JLabel info = new JLabel();
+    JPanel boroughPanel = new JPanel();
+    JPanel sitePanel = new JPanel();
+    JButton clearButton = new JButton("Clear");
     Font title = new Font("Ubuntu",Font.PLAIN,15);
     Font body = new Font("Ubuntu", Font.PLAIN,13);
 
     public PollutionIndex() throws IOException {
 
+        // ComboBox Initialisation
         GetLocalAuthorities la = new GetLocalAuthorities();
         String str = la.print();
         String[] choices = str.split("\n");
-        JComboBox<String> cb = new JComboBox<>(choices);
+        JComboBox<String> boroughsCB = new JComboBox<>(choices);
+        JComboBox<String> sitesCB= new JComboBox<>();
+
+        // Panels
+        boroughPanel.setLayout(new GridBagLayout());
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        boroughPanel.add(boroughLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        boroughPanel.add(boroughsCB, gbc);
+
+        sitePanel.setLayout(new GridBagLayout());
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        sitePanel.add(siteLabel);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        sitePanel.add(sitesCB);
 
         welcome.setFont(title);
         choose.setFont(body);
@@ -44,101 +67,68 @@ public class PollutionIndex extends JPanel{
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        add(showButton,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        add(showCurrentLoc,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        add(empty2,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 5;
         add(choose,gbc);
 
         gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(empty2,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        add(boroughPanel,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        add(sitePanel,gbc);
+
+        gbc.gridx = 0;
         gbc.gridy = 6;
-        add(empty3,gbc);
+        add(clearButton,gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 7;
-        add(cb,gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 7;
-        add(okButton,gbc);
+        add(empty3,gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 8;
         add(info,gbc);
 
-        showButton.addMouseListener(new MouseListener() {
+        boroughsCB.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int boroughID = Profile.boroughs.getSelectedIndex()+1;
+            public void actionPerformed(ActionEvent e) {
+                int boroughID = boroughsCB.getSelectedIndex()+1;
                 try {
                     GetPollutionIndex index = new GetPollutionIndex(boroughID);
-                    showCurrentLoc.setVisible(true);
-                    showCurrentLoc.setText(convertToMultiline("Current location:\n"+index.print()));
+                    String[] siteList = index.getSite().split("\n");
+                    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(siteList);
+                    sitesCB.setModel(model);
+
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
             }
         });
-        okButton.addMouseListener(new MouseListener() {
+
+        sitesCB.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int boroughID = cb.getSelectedIndex()+1;
+            public void actionPerformed(ActionEvent e) {
+                int boroughID = boroughsCB.getSelectedIndex()+1;
                 try {
                     GetPollutionIndex index = new GetPollutionIndex(boroughID);
                     info.setVisible(true);
-                    info.setText(convertToMultiline(index.print()));
+                    info.setText(convertToMultiline(index.getIndex(sitesCB.getSelectedIndex())));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
+        });
 
+        clearButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
+            public void mouseClicked(MouseEvent e) {
+                info.setVisible(false);
+                DefaultComboBoxModel<String> emptyModel = new DefaultComboBoxModel<>();
+                sitesCB.setModel(emptyModel);
             }
         });
 
