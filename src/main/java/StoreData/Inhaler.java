@@ -1,12 +1,9 @@
 package StoreData;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
+
 
 public class Inhaler {
 
@@ -14,6 +11,8 @@ public class Inhaler {
     public String inhaler_name;
     public int puffs_left;
     public int puffs_taken;
+
+    public boolean warning_outcome;
 
 
 
@@ -37,7 +36,8 @@ public class Inhaler {
 
             System.out.println("Inserting data into inhaler");
             Statement s = conn.createStatement();
-            String sqlStr = "INSERT INTO inhalers (inhaler_type,expiry_date,quantity) VALUES ('reliver2','0202',6)";
+            String sqlStr = "INSERT INTO inhalers (inhaler_type,expiry_date,quantity) VALUES ("+this.inhaler_name+ ","
+                    +this.inhaler_expiry+","+this.puffs_left+")";
             System.out.println(sqlStr);
 
             s.executeUpdate(sqlStr);
@@ -50,31 +50,12 @@ public class Inhaler {
 
     }
 
-    public void use_count(int puffs_taken) throws Exception {
-        this.puffs_taken = puffs_taken;
-        int count = 0;
+    public Boolean use_count(){
+        /* The aim of this function is to count how many times the user uses their inhaler in a week
+         will return false if less than 3 times, and return true if more than 3 times a week
+         */
 
-        // Formatting the database correctly
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
-        // Current date
-        Date todayDate = new Date();
-
-        try {
-            // Registering the driver
-            Class.forName("org.postgresql.Driver");
-
-            String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES ("+puffs_taken+")";
-            System.out.println(sqlStr);
-
-            Statement s = conn.createStatement();
-
-            s.executeUpdate(sqlStr);
-
-
-            ResultSet rs = s.executeQuery("select * from use_data");
-
+        /*
             // Retrieving values
             System.out.println("Here we are comparing the dates of recorded uses");
             while (rs.next()) {
@@ -84,7 +65,80 @@ public class Inhaler {
                 if (days < 7){
                     count = count + 1;
                 }
+            }*/
+
+        return warning_outcome;
+    }
+
+    public void use_input(int puffs_taken) throws Exception {
+        /* The aim of this function is to input the uses of the user
+        The table written in Postgresql has the following inputs:
+        no_of_puffs - which defaults to 1
+        use_date - which takes the current time in which use_input is called
+
+        If function is called again within 30 minutes of its last call, it will add the puffs_taken of the current input
+        to the last input
+         */
+        this.puffs_taken = puffs_taken;
+        int count = 0;
+
+        /* Formatting the database correctly
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);*/
+
+        /* Need to change the date format, so we can group uses together */
+        // Change to correct format
+        LocalDateTime current_time = LocalDateTime.now();
+        LocalDateTime check_time = current_time.minusMinutes(30);
+        System.out.println(current_time);
+
+
+        try {
+            // Registering the driver
+            Class.forName("org.postgresql.Driver");
+
+            Statement s = conn.createStatement();
+
+            // Selecting the latest use
+            ResultSet rs = s.executeQuery("select * from use_data ORDER BY use_date DESC LIMIT 1");
+            //Rewrite of retrieving values
+            while (rs.next()) {
+                System.out.println(rs.getTimestamp("use_date"));
+                LocalDateTime last_date = rs.getTimestamp("use_date").toLocalDateTime();
+                LocalDateTime temp_time = LocalDateTime.now();
+                System.out.println("This is the last date:"+ last_date);
+                System.out.println("This is the current date minus 30 mins:"+ temp_time.minus(Duration.ofMinutes(30)));
+
+                int last_id = rs.getInt("id");
+
+                /* Checking if the current input is within 30 minutes */
+                System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
+                System.out.println("Here we are checking if we should group  the inputs together");
+                if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))) == false){
+                    // If it is, we now combine this input and the last input
+                    System.out.println("We are combining the inputs");
+                    System.out.println(last_id);
+
+                    int current_puffs = rs.getInt("no_of_puffs");
+                    int new_puff_no =  current_puffs + this.puffs_taken;
+
+                    /* Changing the number of puffs taken in the table for the current use - Use executeUpdate
+                    as we are not expecting to have any values returned
+                     */
+                    s.executeUpdate("UPDATE use_data SET no_of_puffs = "+new_puff_no+" WHERE id = "+last_id+";");
+                }
+                else{
+                    System.out.println("We are NOT combining the inputs");
+
+                    // Inputting the current use
+                    String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES ("+puffs_taken+")";
+                    System.out.println(sqlStr);
+                    s.executeUpdate(sqlStr);
+                }
             }
+
+
+
 
 
             s.close();
