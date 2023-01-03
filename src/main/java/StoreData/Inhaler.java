@@ -11,8 +11,7 @@ public class Inhaler {
     public String inhaler_name;
     public int puffs_left;
     public int puffs_taken;
-
-    public boolean warning_outcome;
+    public int usage_count;
 
 
 
@@ -50,24 +49,31 @@ public class Inhaler {
 
     }
 
-    public Boolean use_count(){
+    public Boolean use_count() throws SQLException, ClassNotFoundException {
         /* The aim of this function is to count how many times the user uses their inhaler in a week
          will return false if less than 3 times, and return true if more than 3 times a week
          */
+        // Retrieving the data values
+        Class.forName("org.postgresql.Driver");
+        Statement s = conn.createStatement();
+        ResultSet rs = s.executeQuery("select * from use_data");
 
-        /*
-            // Retrieving values
-            System.out.println("Here we are comparing the dates of recorded uses");
-            while (rs.next()) {
-                 long c = (int) (todayDate.getTime() - rs.getDate("use_date").getTime());
-                 long days = TimeUnit.MILLISECONDS.toDays(c);
-                System.out.println(days);
-                if (days < 7){
-                    count = count + 1;
-                }
-            }*/
+        System.out.println("Here we are comparing the dates of recorded uses");
+        usage_count = 0;
+        while (rs.next()) {
+            // Checking if date in table is 7 days before date it is currently
+            if (rs.getTimestamp("use_date").toLocalDateTime().isBefore(LocalDateTime.now().minus(Duration.ofDays(7))) == false) {
+                usage_count = usage_count + 1;
+            }
+        }
+        System.out.println("The final usage count is:"+usage_count);
+        if (usage_count >= 3) {
+            return true;
+        } else {
 
-        return warning_outcome;
+            return false;
+        }
+
     }
 
     public void use_input(int puffs_taken) throws Exception {
@@ -142,17 +148,19 @@ public class Inhaler {
 
 
             s.close();
-            conn.close();
+
 
 
         } finally {
-            if (count >= 3){
-                System.out.println("Based on NHS guidance it is recommended that you see your doctor about your asthma");
+            Boolean output_msg = use_count();
+
+            if (output_msg == true){
+                System.out.println("Based on NHS guidance it is recommended that you see your doctor about your asthma, you have used your inhaler a total of " +usage_count+" times this week");
             }
             else{
-                System.out.println("Thank you for your input");
+                System.out.println("Thank you for your input, you have used your inhaler a total of "+usage_count+" times this week");
             }
-        System.out.println("You have used your inhaler a total of " + count + " times this week");
+            conn.close();
         }
 
     }

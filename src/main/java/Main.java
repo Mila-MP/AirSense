@@ -15,7 +15,7 @@ public class Main {
         // Initialises Look and Feel
         Inhaler myreliever = new Inhaler("reliever", "12/12/12", 200);
         myreliever.add_inhaler();
-        myreliever.use_count(120120);
+        myreliever.use_input(1);
 
         try {
            UIManager.setLookAndFeel( new FlatSolarizedDarkIJTheme());
