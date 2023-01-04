@@ -11,6 +11,11 @@ import java.util.Date;
 
 public class Main {
 
+    Inhaler test_inhaler = new Inhaler("test","2012-11-11",200);
+
+    public Main() throws SQLException, ClassNotFoundException {
+    }
+
     public static void main(String[] args) throws Exception {
         // Initialises Look and Feel
 

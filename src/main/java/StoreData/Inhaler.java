@@ -3,6 +3,8 @@ package StoreData;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 
 public class Inhaler {
@@ -66,6 +68,24 @@ public class Inhaler {
         }
 
     }
+    public Boolean quantity_warning() throws ClassNotFoundException, SQLException {
+        /* This function returns true if the quantity of an inhaler in the inhaler table runs below 25 puffs left*/
+        // Retrieving the data values
+        Class.forName("org.postgresql.Driver");
+        Statement s = conn.createStatement();
+        ResultSet rs = s.executeQuery("select * from use_data");
+        Boolean warning = false;
+        while(rs.next()){
+            if(rs.getInt("quantity") < 25){
+                warning = true;
+            }
+        }
+        return warning;
+    }
+
+
+
+
 
     public void use_input(int puffs_taken) throws Exception {
         /* The aim of this function is to input the uses of the user
