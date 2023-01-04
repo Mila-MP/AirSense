@@ -14,8 +14,14 @@ public class Profile extends JPanel {
     String name;
     String location;
     JLabel nameLabel = new JLabel("Name:");
+    JLabel relieverLabel = new JLabel("Reliever:");
+    JLabel ageLabel = new JLabel("Age:");
+    JLabel genderLabel = new JLabel("Gender:");
     JLabel locLabel = new JLabel("My current location:  ");
     JTextField nameField = new JTextField();
+    JTextField relieverField = new JTextField();
+    JTextField ageField = new JTextField();
+    JTextField genderField = new JTextField();
     static JComboBox<String> boroughs;
 
     public Profile() throws IOException {
@@ -33,9 +39,27 @@ public class Profile extends JPanel {
         add(nameField,gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        add(locLabel,gbc);
+        add(relieverLabel,gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
+        add(relieverField,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(ageLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        add(ageField,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(genderLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        add(genderField,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        add(locLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
         add(boroughs,gbc);
 
     }
@@ -43,13 +67,13 @@ public class Profile extends JPanel {
 
 
 
-    public static void main (String[] args) {
+    public void main(String[] args) {
         try {
             String url = "jdbc:postgresql://localhost:5433/postgres";
             Connection conn = DriverManager.getConnection(url,"postgres","AirSense");
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO users_ " +
-                    "VALUES ('MyName', 'reliever', '20', 'female', 'Harrow')");
+                    "VALUES ("+nameField+", "+relieverField+", "+ageField+", "+genderField+", "+locLabel+")");
 
 
             conn.close();
@@ -57,6 +81,5 @@ public class Profile extends JPanel {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
-
     }
 }
