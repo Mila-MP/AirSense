@@ -13,9 +13,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         // Initialises Look and Feel
-        Inhaler myreliever = new Inhaler("reliever", "12/12/12", 200);
-        myreliever.add_inhaler();
-        myreliever.use_input(1);
 
         try {
            UIManager.setLookAndFeel( new FlatSolarizedDarkIJTheme());

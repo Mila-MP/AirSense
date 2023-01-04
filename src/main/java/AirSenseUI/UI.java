@@ -17,7 +17,7 @@ public class UI extends JPanel{
     InhalerUse inhalerUsePanel = new InhalerUse();
     JTabbedPane tabbedPane = new JTabbedPane();
 
-    public UI() throws IOException, SQLException {
+    public UI() throws IOException, SQLException, ClassNotFoundException {
         tabbedPane.addTab("Welcome Page",welcomePanel);
         tabbedPane.addTab("Profile",profilePanel);
         tabbedPane.addTab("General Information",infoPanel);

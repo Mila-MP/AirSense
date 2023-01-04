@@ -13,40 +13,31 @@ public class Inhaler {
     public int puffs_taken;
     public int usage_count;
 
+    public int inhaler_id;
+
 
 
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
-    public Inhaler(String inhaler_type, String expiry, int quantity) throws SQLException {
-        this.inhaler_name = inhaler_type;
+    public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
+        this.inhaler_name = inhaler_name;
         this.inhaler_expiry = expiry;
         this.puffs_left = quantity;
 
 
     }
 
-    public void add_inhaler() {
+    public void add_inhaler() throws ClassNotFoundException, SQLException {
+        /* The aim of this function is to add an inhaler to the database
+        */
+        // Registering the driver
+        Class.forName("org.postgresql.Driver");
 
-        try {
-            // Registering the driver
-            Class.forName("org.postgresql.Driver");
-
-            System.out.println("Inserting data into inhaler");
-            Statement s = conn.createStatement();
-            String sqlStr = "INSERT INTO inhalers (inhaler_type,expiry_date,quantity) VALUES ("+this.inhaler_name+ ","
-                    +this.inhaler_expiry+","+this.puffs_left+")";
-            System.out.println(sqlStr);
-
-            s.executeUpdate(sqlStr);
-
-            conn.commit();
-            s.close();
-            conn.close();
-        } catch (Exception e) {
-        }
-
+        Statement s1 = conn.createStatement();
+        s1.executeUpdate("INSERT INTO inhalers (inhaler_type,expiry_date,quantity) VALUES ('"+this.inhaler_name+"','"+this.inhaler_expiry+"',"+this.puffs_left+")");
+        s1.close();
     }
 
     public Boolean use_count() throws SQLException, ClassNotFoundException {
@@ -86,7 +77,7 @@ public class Inhaler {
         to the last input
          */
         this.puffs_taken = puffs_taken;
-        int count = 0;
+
 
         /* Formatting the database correctly
         String pattern = "yyyy-MM-dd";
@@ -105,46 +96,64 @@ public class Inhaler {
 
             Statement s = conn.createStatement();
 
+            // Updating the quantity on the inhaler table
+            // Retrieving the current quantity
+            ResultSet rs1 = s.executeQuery("SELECT * FROM inhalers WHERE inhaler_type ='"+this.inhaler_name+"'");
+
+            // Calculating new quantity
+            rs1.next();
+            int updated_puff_no = rs1.getInt("quantity")-this.puffs_taken;
+            System.out.print(updated_puff_no);
+            // Updating table with new quantity
+            s.executeUpdate("UPDATE inhalers SET quantity = "+updated_puff_no+" WHERE inhaler_type ='"+this.inhaler_name+"'");
+
+
             // Selecting the latest use
             ResultSet rs = s.executeQuery("select * from use_data ORDER BY use_date DESC LIMIT 1");
             //Rewrite of retrieving values
-            while (rs.next()) {
-                System.out.println(rs.getTimestamp("use_date"));
-                LocalDateTime last_date = rs.getTimestamp("use_date").toLocalDateTime();
-                LocalDateTime temp_time = LocalDateTime.now();
-                System.out.println("This is the last date:"+ last_date);
-                System.out.println("This is the current date minus 30 mins:"+ temp_time.minus(Duration.ofMinutes(30)));
+            // Empty database check
+            ResultSet rs_empty = s.executeQuery("SELECT count(*) FROM use_data");
+            rs_empty.next();
+            if (rs_empty.getInt(1) == 0){
+                String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES ("+puffs_taken+")";
+                System.out.println(sqlStr);
+                s.executeUpdate(sqlStr);
+            }
+            else {
+                while (rs.next()) {
+                    System.out.println(rs.getTimestamp("use_date"));
+                    LocalDateTime last_date = rs.getTimestamp("use_date").toLocalDateTime();
+                    LocalDateTime temp_time = LocalDateTime.now();
+                    System.out.println("This is the last date:" + last_date);
+                    System.out.println("This is the current date minus 30 mins:" + temp_time.minus(Duration.ofMinutes(30)));
 
-                int last_id = rs.getInt("id");
+                    int last_id = rs.getInt("id");
 
-                /* Checking if the current input is within 30 minutes */
-                System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
-                System.out.println("Here we are checking if we should group  the inputs together");
-                if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))) == false){
-                    // If it is, we now combine this input and the last input
-                    System.out.println("We are combining the inputs");
-                    System.out.println(last_id);
+                    /* Checking if the current input is within 30 minutes */
+                    System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
+                    System.out.println("Here we are checking if we should group  the inputs together");
+                    if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))) == false) {
+                        // If it is, we now combine this input and the last input
+                        System.out.println("We are combining the inputs");
+                        System.out.println(last_id);
 
-                    int current_puffs = rs.getInt("no_of_puffs");
-                    int new_puff_no =  current_puffs + this.puffs_taken;
+                        int current_puffs = rs.getInt("no_of_puffs");
+                        int new_puff_no = current_puffs + this.puffs_taken;
 
                     /* Changing the number of puffs taken in the table for the current use - Use executeUpdate
                     as we are not expecting to have any values returned
                      */
-                    s.executeUpdate("UPDATE use_data SET no_of_puffs = "+new_puff_no+" WHERE id = "+last_id+";");
-                }
-                else{
-                    System.out.println("We are NOT combining the inputs");
+                        s.executeUpdate("UPDATE use_data SET no_of_puffs = " + new_puff_no + " WHERE id = " + last_id + ";");
+                    } else {
+                        System.out.println("We are NOT combining the inputs");
 
-                    // Inputting the current use
-                    String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES ("+puffs_taken+")";
-                    System.out.println(sqlStr);
-                    s.executeUpdate(sqlStr);
+                        // Inputting the current use
+                        String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES (" + puffs_taken + ")";
+                        System.out.println(sqlStr);
+                        s.executeUpdate(sqlStr);
+                    }
                 }
             }
-
-
-
 
 
             s.close();
@@ -160,7 +169,6 @@ public class Inhaler {
             else{
                 System.out.println("Thank you for your input, you have used your inhaler a total of "+usage_count+" times this week");
             }
-            conn.close();
         }
 
     }

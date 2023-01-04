@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.sql.*;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import StoreData.Inhaler;
 
 public class InhalerUse extends JPanel {
 
@@ -24,164 +25,144 @@ public class InhalerUse extends JPanel {
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
-    public InhalerUse() throws SQLException {
-        setLayout(new GridLayout(2,1));
-
-        java.util.Date todayDate = new Date();
-
-        int use_count = 0;
-
-        // Loop through all in the database
-
+    public DefaultTableModel refresh_model() throws SQLException {
+        /* The purpose of this function is to refresh the table displayed on the UI. It does this by creating a new table model
+        which can then be assigned to the appropriate JTable
+         */
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Use date");
+        model.addColumn("Number of puffs");
 
         Statement s = conn.createStatement();
-        String query = "SELECT count(*) FROM use_data";
         String query2 = "SELECT * FROM use_data";
-        //Executing the query
-        ResultSet rs = s.executeQuery(query);
-        //Retrieving the result
-        rs.next();
-        int count = rs.getInt(1);
-        // System.out.println("Number of records in the use_data table: "+count);
+
         ResultSet rs2 = s.executeQuery(query2);
-        String [][]use_list = new String [count][2];
-        int r = 0;
-        while(rs2.next()){
-
-            String data1 = String.valueOf(rs2.getDate("use_date"));
-            String data2 = String.valueOf(rs2.getInt("no_of_puffs"));
-            use_list[r][0] = data1;
-            use_list[r][1] = data2;
-            r = r + 1;
-
-            long c = (int) (todayDate.getTime() - rs2.getDate("use_date").getTime());
-            long days = TimeUnit.MILLISECONDS.toDays(c);
-
-
-            if (days < 7){
-                use_count = use_count + 1;
-           // model.insertRow(0, new Object[]{String.valueOf(rs2.getDate("use_date")),String.valueOf(rs2.getInt("no_of_puffs"))});
-
+        while (rs2.next()) {
+            model.insertRow(0, new Object[]{rs2.getString("use_date"), rs2.getInt("no_of_puffs")});
         }
-
-            }
-        String msg;
-        if (use_count >= 3){
-            msg = "Based on NHS guidance you should contact your doctor";
+        return model;
     }
-            else{
-            msg = "Thank you for your input";
-        }
-        System.out.println(use_list);
 
-        String[] columnNames = {"use date", "number of puffs taken"};
-        JTable use_table = new JTable (use_list,columnNames);
-
-            // add new row to the table - actionListener and rowCount - rowCount in table
-            JLabel txt = new JLabel(msg);
-            JScrollPane scrollPane = new JScrollPane(use_table);
-            use_table.setFillsViewportHeight(true);
-            tablePanel.add(scrollPane);
-            tablePanel.add(txt);
-            buttonPanel.add(used);
-            add(tablePanel);
-            add(buttonPanel);
-
-            // Creating the input for no. of puffs
-            JTextField puffs = new JTextField();
-
-            /*used.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    Inhaler myreliever = null;
-                    try {
-                        myreliever = new Inhaler("reliever", "12/12/12", 200);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    myreliever.add_inhaler();
-                    try {
-                        myreliever.use_count(3);
-                    } catch (Exception ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    //tablePanel.revalidate();
-
-                    Statement s = conn.createStatement();
-                    String query = "SELECT count(*) FROM use_data";
-                    String query2 = "SELECT * FROM use_data";
-                    //Executing the query
-                    ResultSet rs = s.executeQuery(query);
-                    //Retrieving the result
-                    rs.next();
-                    int count = rs.getInt(1);
-                    // System.out.println("Number of records in the use_data table: "+count);
-                    ResultSet rs2 = s.executeQuery(query2);
-                    String [][]use_list = new String [count][2];
-                    int r = 0;
-                    while(rs2.next()){
-
-                        String data1 = String.valueOf(rs2.getDate("use_date"));
-                        String data2 = String.valueOf(rs2.getInt("no_of_puffs"));
-                        use_list[r][0] = data1;
-                        use_list[r][1] = data2;
-                        r = r + 1;
-
-                        long c = (int) (todayDate.getTime() - rs2.getDate("use_date").getTime());
-                        long days = TimeUnit.MILLISECONDS.toDays(c);
+    public InhalerUse() throws SQLException, ClassNotFoundException {
+        setLayout(new GridLayout(2, 1));
 
 
-                        if (days < 7){
-                            use_count = use_count + 1;
-                            // model.insertRow(0, new Object[]{String.valueOf(rs2.getDate("use_date")),String.valueOf(rs2.getInt("no_of_puffs"))});
+        JTable use_table = new JTable(refresh_model());
 
-                        }
+        // add new row to the table - actionListener and rowCount - rowCount in table
 
-                    }
-                    String msg;
-                    if (use_count >= 3){
+        JScrollPane scrollPane = new JScrollPane(use_table);
+        use_table.setFillsViewportHeight(true);
+        tablePanel.add(scrollPane);
+        buttonPanel.add(used);
+        add(tablePanel);
+        add(buttonPanel);
+
+        // Creating the input for no. of puffs
+        JTextField puffs = new JTextField();
+
+        used.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Creation of inhaler with qualities found in the first row of myInhalers
+                Statement s = null;
+                try {
+                    s = conn.createStatement();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                String query2 = "SELECT * FROM inhalers";
+                ResultSet rs2 = null;
+                try {
+                    rs2 = s.executeQuery(query2);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    rs2.next();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                Inhaler current = null;
+                try {
+                    current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    current.use_count();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+                String msg;
+                try {
+                    if (current.use_count() == true) {
                         msg = "Based on NHS guidance you should contact your doctor";
-                    }
-                    else{
+                    } else {
                         msg = "Thank you for your input";
                     }
-                    System.out.println(use_list);
-
-                    String[] columnNames = {"use date", "number of puffs taken"};
-                    JTable use_table = new JTable (use_list,columnNames);
-
-                    // add new row to the table - actionListener and rowCount - rowCount in table
-                    JLabel txt = new JLabel(msg);
-                    JScrollPane scrollPane = new JScrollPane(use_table);
-                    use_table.setFillsViewportHeight(true);
-                    tablePanel.add(scrollPane);
-                    tablePanel.add(txt);
-                    tablePanel.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
                 }
 
-                @Override
-                public void mousePressed(MouseEvent e) {
+                JLabel txt = new JLabel(msg);
+                tablePanel.add(txt);
 
+                try {
+                    current.use_input(1);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
                 }
 
-                @Override
-                public void mouseReleased(MouseEvent e) {
-
+                // Refresh of table
+                try {
+                    use_table.setModel(refresh_model());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
+                try {
+                    if (current.use_count() == true) {
+                        txt.setText("Based on NHS guidance you should contact your doctor");
+                    } else {
+                        txt.setText("Thank you for your input");
+                    }
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
 
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
                 }
+            }
 
-                @Override
-                public void mouseExited(MouseEvent e) {
+            @Override
+            public void mousePressed(MouseEvent e) {
 
-                }
-            });*/
+            }
 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+        });
 
     }
 
-    }
-
+}
