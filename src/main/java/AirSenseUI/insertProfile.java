@@ -2,10 +2,7 @@ package AirSenseUI;
 
 import java.sql.*;
 
-/**
- * JdbcInsert1.java - Demonstrates how to INSERT data into an SQL
- *                    database using Java JDBC.
- */
+
 class JdbcInsert1 {
 
     public static void main (String[] args) {

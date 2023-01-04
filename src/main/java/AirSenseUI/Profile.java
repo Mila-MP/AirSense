@@ -5,6 +5,9 @@ import GetData.GetLocalAuthorities;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class Profile extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
@@ -34,6 +37,26 @@ public class Profile extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 1;
         add(boroughs,gbc);
+
+    }
+
+
+
+
+    public static void main (String[] args) {
+        try {
+            String url = "jdbc:postgresql://localhost:5433/postgres";
+            Connection conn = DriverManager.getConnection(url,"postgres","AirSense");
+            Statement st = conn.createStatement();
+            st.executeUpdate("INSERT INTO users_ " +
+                    "VALUES ('MyName', 'reliever', '20', 'female', 'Harrow')");
+
+
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
 
     }
 }
