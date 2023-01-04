@@ -21,6 +21,8 @@ public class InhalerUse extends JPanel {
     JPanel tablePanel = new JPanel();
     JPanel buttonPanel = new JPanel();
     JButton used = new JButton("I just used my Inhaler");
+
+    JButton refresh = new JButton("Refresh page");
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
@@ -57,6 +59,10 @@ public class InhalerUse extends JPanel {
         buttonPanel.add(used);
         add(tablePanel);
         add(buttonPanel);
+        add(refresh);
+
+        JLabel txt = new JLabel();
+        tablePanel.add(txt);
 
         // Creating the input for no. of puffs
         JTextField puffs = new JTextField();
@@ -98,21 +104,18 @@ public class InhalerUse extends JPanel {
                 } catch (ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
-                String msg;
+
                 try {
                     if (current.use_count() == true) {
-                        msg = "Based on NHS guidance you should contact your doctor";
+                        txt.setText("Based on NHS guidance you should contact your doctor");
                     } else {
-                        msg = "Thank you for your input";
+                        txt.setText("Thank you for your input");
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
-
-                JLabel txt = new JLabel(msg);
-                tablePanel.add(txt);
 
                 try {
                     current.use_input(1);
@@ -139,6 +142,7 @@ public class InhalerUse extends JPanel {
                 } catch (ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
+
             }
 
             @Override
@@ -162,6 +166,39 @@ public class InhalerUse extends JPanel {
             }
 
         });
+
+        refresh.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    use_table.setModel(refresh_model());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+        });
+
 
     }
 

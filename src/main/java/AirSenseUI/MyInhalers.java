@@ -31,6 +31,11 @@ public class MyInhalers extends JPanel{
     JLabel quantity_label = new JLabel();
     JButton add_inhaler = new JButton("Add inhaler");
 
+    public JButton DeleteInhalerButton = new JButton("Delete current Inhaler");
+
+    JTable tableMyInhalers = new JTable ();
+
+
     public DefaultTableModel refresh_model() throws SQLException {
         /* The purpose of this function is to refresh the table displayed on the UI. It does this by creating a new table model
         which can then be assigned to the appropriate JTable
@@ -50,87 +55,110 @@ public class MyInhalers extends JPanel{
        return model;
     }
 
-    public MyInhalers() throws SQLException {
+    public void AddInhaler_profile(){
+        add_inhaler.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String name = inhaler_name.getText();
+                String expiry = expiry_date.getText();
+                int quantity = Integer.parseInt(quantity_input.getText());
+                try {
+                    Inhaler current = new Inhaler(name,expiry,quantity);
+                    current.add_inhaler();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
 
+                remove(inhaler_name);
+                remove(expiry_label);
+                remove(expiry_date);
+                remove(quantity_label);
+                remove(quantity_input);
+                remove(add_inhaler);
+
+                add(DeleteInhalerButton);
+
+                try {
+                    tableMyInhalers.setModel(refresh_model());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
+
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    public void EmptyTableCheck() throws SQLException {
         // If inhalers is empty
         Statement s = conn.createStatement();
-        ResultSet rs_empty = s.executeQuery("SELECT count(*) FROM use_data");
-        int count = 0;
-
-        if (count == 1){
+        ResultSet rs_empty = s.executeQuery("SELECT count(*) AS rowcount FROM inhalers");
+        rs_empty.next();
+        int row_count = rs_empty.getInt("rowcount");
+        System.out.println("This is inhaler row count:"+row_count);
+        if (row_count == 0){
+            System.out.println("I am in the if statement");
             add(inhaler_name);
             add(expiry_label);
             add(expiry_date);
             add(quantity_label);
             add(quantity_input);
             add(add_inhaler);
-            wait = false;
 
-            while(wait == false){
-                try {
-                    Thread.sleep(200);
-                } catch(InterruptedException e) {
-                }
-            }
+            AddInhaler_profile();
 
-            add_inhaler.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    String name = inhaler_name.getText();
-                    String expiry = expiry_date.getText();
-                    int quantity = Integer.parseInt(quantity_input.getText());
-                    try {
-                        Inhaler current = new Inhaler(name,expiry,quantity);
-                        current.add_inhaler();
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                    remove(inhaler_name);
-                    remove(expiry_label);
-                    remove(expiry_date);
-                    remove(quantity_label);
-                    remove(quantity_input);
-                    remove(add_inhaler);
-
-
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-
-                }
-            });
         }
+        else{
+            add(DeleteInhalerButton);
+        }
+    }
+
+    public void DeleteInhalerProfile() throws SQLException {
+        Statement s = conn.createStatement();
+        s.executeUpdate("TRUNCATE TABLE inhalers");
+        s.executeUpdate("TRUNCATE TABLE use_data");
+    }
+
+    public MyInhalers() throws SQLException {
 
         setLayout(new FlowLayout());
         quantity_label.setForeground(Color.red);
 
         // Table first made when the app is started
-        DefaultTableModel MyInhalersModel = refresh_model();
-        JTable tableMyInhalers = new JTable (MyInhalersModel);
+        // DefaultTableModel MyInhalersModel = refresh_model();
+        // JTable tableMyInhalers = new JTable (MyInhalersModel);
+        tableMyInhalers.setModel(refresh_model());
 
         JScrollPane scrollPane = new JScrollPane(tableMyInhalers);
         tableMyInhalers.setFillsViewportHeight(true);
         add(scrollPane);
         add(refresh);
+
+        EmptyTableCheck();
 
 
         // https://www.tutorialspoint.com/how-can-we-make-jtextfield-accept-only-numbers-in-java
@@ -183,47 +211,52 @@ public class MyInhalers extends JPanel{
 
         });
 
+        DeleteInhalerButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    DeleteInhalerProfile();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    tableMyInhalers.setModel(refresh_model());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
+                remove(DeleteInhalerButton);
 
+                try {
+                    System.out.print("I am running an EmptyTableCheck");
+                    EmptyTableCheck();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
-
-        /* f = new JFrame();
-        String[] columnNames = {"Inhaler Type", "Expiry date", "Quantity remaining"};
-        Object[][] data = {{"Reliever", "12-12-2020", "200"}};
-        inhaler_table = new JTable(data, columnNames);
-
-        // Frame Title
-
-        // Data to be displayed in the JTable
-
-        // Grabbing data from Postgresql table
-        try {
-            Statement s = conn.createStatement();
-            String sqlStr = "SELECT * FROM inhalers WHERE id>0;";
-            ResultSet rs = s.executeQuery(sqlStr);
-
-            // Row count
-            int rowCount = 0;
-            if (rs.last()) {
             }
-            /*while (rs.next()) {
-                String temp_type = String.valueOf(rs.getString("inhaler_type"));
-                String temp_expiry = String.valueOf(rs.getString("expiry_date"));
-                String temp_quantity = String.valueOf(rs.getInt("quantity"));
 
-                Object[] row = { temp_type, temp_expiry, temp_quantity};
+            @Override
+            public void mousePressed(MouseEvent e) {
 
-                data.(row);
-            System.out.println(rs.getString("inhaler_type") + rs.getString("expiry_date") + rs.getInt("quantity"));
             }
-            // Formatting it correctly into the JTable
 
-        } catch (Exception e) {
-        }
+            @Override
+            public void mouseReleased(MouseEvent e) {
 
-        JScrollPane scrollPane = new JScrollPane(inhaler_table);
-        inhaler_table.setFillsViewportHeight(true);
-        add(scrollPane); */
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+        });
 
     }
 }
