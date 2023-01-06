@@ -39,18 +39,18 @@ public class GetSpecies {
     }
 
         public String print(){
+
             StringBuilder sb = new StringBuilder();
             JSONObject obj = new JSONObject(responseBody);
             JSONObject airQualitySpecies = obj.getJSONObject("AirQualitySpecies");
             JSONArray species = airQualitySpecies.getJSONArray("Species");
             for (int i = 0; i < species.length(); i++){
                 JSONObject obj2 = species.getJSONObject(i);
-                String authorityCode = obj2.getString("@SpeciesCode");
-                String authorityName = obj2.getString("@SpeciesName");
-                sb.append(authorityCode + ": "+ authorityName + "\n");
+                String speciesCode = obj2.getString("@SpeciesCode");
+                String speciesName = obj2.getString("@SpeciesName");
+                sb.append(speciesCode).append(": ") .append(speciesName).append("\n");
             }
-            String finalString = sb.toString();
-            return finalString;
+            return sb.toString();
         }
 
 

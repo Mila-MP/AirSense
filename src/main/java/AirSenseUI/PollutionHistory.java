@@ -7,8 +7,6 @@ import org.jfree.chart.ChartPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -105,39 +103,33 @@ public class PollutionHistory extends JPanel {
         add(buttonPanel,gbc);
 
         // Button/ComboBox Configuration
-        boroughsCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int localAuthorityID = boroughsCB.getSelectedIndex();
-                try {
-                    GetPollutionIndex sites = new GetPollutionIndex(localAuthorityID+1);
-                    String str2 = sites.getSite();
-                    String[] choices2 = str2.split("\n");
-                    DefaultComboBoxModel<String> siteModel = new DefaultComboBoxModel<>(choices2);
-                    sitesCB.setModel(siteModel);
+        boroughsCB.addActionListener(e -> {
+            int localAuthorityID = boroughsCB.getSelectedIndex();
+            try {
+                GetPollutionIndex sites = new GetPollutionIndex(localAuthorityID+1);
+                String str2 = sites.getSite();
+                String[] choices2 = str2.split("\n");
+                DefaultComboBoxModel<String> siteModel = new DefaultComboBoxModel<>(choices2);
+                sitesCB.setModel(siteModel);
 
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
-        sitesCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int localAuthorityID = boroughsCB.getSelectedIndex();
-                int siteIndex = sitesCB.getSelectedIndex();
-                try {
-                    GetPollutionIndex species = new GetPollutionIndex(localAuthorityID+1);
-                    species.getIndex(siteIndex);
-                    String str = species.getSpecies(siteIndex);
-                    String[] choices = str.split("\n");
-                    DefaultComboBoxModel<String> speciesModel = new DefaultComboBoxModel<>(choices);
-                    speciesCB.setModel(speciesModel);
+        sitesCB.addActionListener(e -> {
+            int localAuthorityID = boroughsCB.getSelectedIndex();
+            int siteIndex = sitesCB.getSelectedIndex();
+            try {
+                GetPollutionIndex species = new GetPollutionIndex(localAuthorityID+1);
+                species.getIndex(siteIndex);
+                String str = species.getSpecies(siteIndex);
+                String[] choices = str.split("\n");
+                DefaultComboBoxModel<String> speciesModel = new DefaultComboBoxModel<>(choices);
+                speciesCB.setModel(speciesModel);
 
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
@@ -170,7 +162,6 @@ public class PollutionHistory extends JPanel {
                 try {
                     remove(plotPanel);
                     DefaultComboBoxModel<String> emptyModel = new DefaultComboBoxModel<>();
-                    System.out.println("lol");
                     sitesCB.setModel(emptyModel);
                     speciesCB.setModel(emptyModel);
                     showButton.setEnabled(true);

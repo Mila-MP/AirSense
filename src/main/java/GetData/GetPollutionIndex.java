@@ -13,6 +13,7 @@ import java.net.URL;
 public class GetPollutionIndex {
     int localAuthorityID;
     String responseBody;
+    public String indices;
 
     public GetPollutionIndex(int localAuthorityID) throws IOException {
         this.localAuthorityID = localAuthorityID;
@@ -48,21 +49,23 @@ public class GetPollutionIndex {
 
     public String getIndex(int siteIndex){
         String indexString;
+        indices = "";
         if (responseBody.equals("")){
             indexString = "No measurements here";
         }
         else {
-            StringBuilder sbIndex = new StringBuilder();
+            StringBuilder sbIndexString = new StringBuilder();
+            StringBuilder sbIndices = new StringBuilder();
             JSONObject response = new JSONObject(responseBody);
             JSONObject dailyAirQualityIndex = response.getJSONObject("DailyAirQualityIndex");
             String date = dailyAirQualityIndex.getString("@MonitoringIndexDate");
-            sbIndex.append("On the " + date + ":\n");
+            sbIndexString.append("On the ").append(date).append(":\n");
             JSONObject localAuthority = dailyAirQualityIndex.getJSONObject("LocalAuthority");
             try { // if more than one measurement site
                 JSONArray sites = localAuthority.getJSONArray("Site");
                 JSONObject site = sites.getJSONObject(siteIndex);
                 String siteName = site.getString("@SiteName");
-                sbIndex.append("in " + siteName + ", the pollution indices are:\n");
+                sbIndexString.append("in ").append(siteName).append(", the pollution indices are:\n");
 
                     try { // if more than one species measured
                         JSONArray species = site.getJSONArray("Species");
@@ -70,36 +73,42 @@ public class GetPollutionIndex {
                             JSONObject specie = species.getJSONObject(j);
                             String speciesCode = specie.getString("@SpeciesCode");
                             String airQualityIndex = specie.getString("@AirQualityIndex");
-                            sbIndex.append(speciesCode + ": " + airQualityIndex + "\n");
+                            sbIndexString.append(speciesCode).append(": ").append(airQualityIndex).append("\n");
+                            sbIndices.append(airQualityIndex);
                         }
                     } catch (Exception e1) { // if only one species measured
                         JSONObject specie = site.getJSONObject("Species");
                         String speciesCode = specie.getString("@SpeciesCode");
                         String airQualityIndex = specie.getString("@AirQualityIndex");
-                        sbIndex.append(speciesCode + ": " + airQualityIndex + "\n");
+                        sbIndexString.append(speciesCode).append(": ").append(airQualityIndex).append("\n");
+                        sbIndices.append(airQualityIndex);
                     }
 
-                indexString = sbIndex.toString();
+                indexString = sbIndexString.toString();
+                indices = sbIndices.toString();
 
             } catch (Exception e2) { // if only one measurement site
                 JSONObject site = localAuthority.getJSONObject("Site");
                 String siteName = site.getString("@SiteName");
-                sbIndex.append("in " + siteName + ", the pollution indices are:\n");
+                sbIndexString.append("in ").append(siteName).append(", the pollution indices are:\n");
                 try { // if more than one species measured
                     JSONArray species = site.getJSONArray("Species");
                     for (int j = 0; j < species.length(); j++) {
                         JSONObject specie = species.getJSONObject(j);
                         String speciesCode = specie.getString("@SpeciesCode");
                         String airQualityIndex = specie.getString("@AirQualityIndex");
-                        sbIndex.append(speciesCode + ": " + airQualityIndex + "\n");
+                        sbIndexString.append(speciesCode).append(": ").append(airQualityIndex).append("\n");
+                        sbIndices.append(airQualityIndex);
                     }
                 } catch (Exception e3) { // if only one species measured
                     JSONObject specie = site.getJSONObject("Species");
                     String speciesCode = specie.getString("@SpeciesCode");
                     String airQualityIndex = specie.getString("@AirQualityIndex");
-                    sbIndex.append(speciesCode + ": " + airQualityIndex + "\n");
+                    sbIndexString.append(speciesCode).append(": ").append(airQualityIndex).append("\n");
+                    sbIndices.append(airQualityIndex);
                 }
-            indexString = sbIndex.toString();
+            indexString = sbIndexString.toString();
+            indices = sbIndices.toString();
             }
         }
         return indexString;
@@ -109,7 +118,6 @@ public class GetPollutionIndex {
         String siteString;
         if (responseBody.equals("")){
             siteString = "No sites here";
-            System.out.println("Slay");
         }
         else{
             StringBuilder sbSites = new StringBuilder();
@@ -123,7 +131,7 @@ public class GetPollutionIndex {
                     JSONObject site = sites.getJSONObject(i);
                     String siteName = site.getString("@SiteName");
                     String siteCode = site.getString("@SiteCode");
-                    sbSites.append(siteCode + ": " + siteName + "\n");
+                    sbSites.append(siteCode).append(": ").append(siteName).append("\n");
                 }
                 siteString = sbSites.toString();
 
@@ -131,7 +139,7 @@ public class GetPollutionIndex {
                 JSONObject site = localAuthority.getJSONObject("Site");
                 String siteName = site.getString("@SiteName");
                 String siteCode = site.getString("@SiteCode");
-                sbSites.append(siteCode + ": " + siteName + "\n");
+                sbSites.append(siteCode).append(": ").append(siteName).append("\n");
                 siteString = sbSites.toString();
             }
         }
@@ -157,12 +165,12 @@ public class GetPollutionIndex {
                     for (int j = 0; j < species.length(); j++) {
                         JSONObject specie = species.getJSONObject(j);
                         String speciesCode = specie.getString("@SpeciesCode");
-                        sbSpecies.append(speciesCode + "\n");
+                        sbSpecies.append(speciesCode).append("\n");
                     }
                 } catch (Exception e1) { // if only one species measured
                     JSONObject specie = site.getJSONObject("Species");
                     String speciesCode = specie.getString("@SpeciesCode");
-                    sbSpecies.append(speciesCode + "\n");
+                    sbSpecies.append(speciesCode).append("\n");
                 }
 
                 speciesString = sbSpecies.toString();
@@ -174,12 +182,12 @@ public class GetPollutionIndex {
                     for (int j = 0; j < species.length(); j++) {
                         JSONObject specie = species.getJSONObject(j);
                         String speciesCode = specie.getString("@SpeciesCode");
-                        sbSpecies.append(speciesCode + "\n");
+                        sbSpecies.append(speciesCode).append("\n");
                     }
                 } catch (Exception e3) { // if only one species measured
                     JSONObject specie = site.getJSONObject("Species");
                     String speciesCode = specie.getString("@SpeciesCode");
-                    sbSpecies.append(speciesCode + "\n");
+                    sbSpecies.append(speciesCode).append("\n");
                 }
                 speciesString = sbSpecies.toString();
             }

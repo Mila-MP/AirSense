@@ -1,14 +1,16 @@
 package AirSenseUI;
+import GetData.GetAdvice;
 import GetData.GetLocalAuthorities;
 import GetData.GetPollutionIndex;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PollutionIndex extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
@@ -20,6 +22,7 @@ public class PollutionIndex extends JPanel{
     JLabel boroughLabel = new JLabel("Borough:");
     JLabel siteLabel = new JLabel("Measurement site:");
     JLabel info = new JLabel();
+    JLabel warning = new JLabel();
     JPanel boroughPanel = new JPanel();
     JPanel sitePanel = new JPanel();
     JButton clearButton = new JButton("Clear");
@@ -27,7 +30,6 @@ public class PollutionIndex extends JPanel{
     Font body = new Font("Ubuntu", Font.PLAIN,13);
 
     public PollutionIndex() throws IOException {
-
         // ComboBox Initialisation
         GetLocalAuthorities la = new GetLocalAuthorities();
         String str = la.print();
@@ -93,33 +95,43 @@ public class PollutionIndex extends JPanel{
         gbc.gridy = 8;
         add(info,gbc);
 
-        boroughsCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int boroughID = boroughsCB.getSelectedIndex()+1;
-                try {
-                    GetPollutionIndex index = new GetPollutionIndex(boroughID);
-                    String[] siteList = index.getSite().split("\n");
-                    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(siteList);
-                    sitesCB.setModel(model);
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        add(warning,gbc);
 
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+        boroughsCB.addActionListener(e -> {
+            int boroughID = boroughsCB.getSelectedIndex()+1;
+            try {
+                GetPollutionIndex index = new GetPollutionIndex(boroughID);
+                String[] siteList = index.getSite().split("\n");
+                DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(siteList);
+                sitesCB.setModel(model);
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
-        sitesCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int boroughID = boroughsCB.getSelectedIndex()+1;
-                try {
-                    GetPollutionIndex index = new GetPollutionIndex(boroughID);
-                    info.setVisible(true);
-                    info.setText(convertToMultiline(index.getIndex(sitesCB.getSelectedIndex())));
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+        sitesCB.addActionListener(e -> {
+            int boroughID = boroughsCB.getSelectedIndex()+1;
+            try {
+                GetPollutionIndex pollutionIndex = new GetPollutionIndex(boroughID);
+                info.setVisible(true);
+                String indexString = pollutionIndex.getIndex(sitesCB.getSelectedIndex());
+                info.setText(convertToMultiline(indexString));
+
+                // Warning message
+                String indices = pollutionIndex.indices;
+                List<Integer> indexList=new ArrayList<>();
+                for (int i = 0; i < indices.length(); i++){
+                    indexList.add(Character.getNumericValue(indices.charAt(i)));
                 }
+                int maxIndex = Collections.max(indexList);
+                GetAdvice advice = new GetAdvice(maxIndex);
+                warning.setText(advice.print());
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
