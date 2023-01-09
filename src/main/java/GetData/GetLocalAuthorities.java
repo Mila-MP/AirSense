@@ -2,7 +2,6 @@ package GetData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,15 +9,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * The GetLocalAuthorities class provides access to a list of all the boroughs
+ * of London. The boroughs are retrieved from the London Air API.
+ */
 public class GetLocalAuthorities{
+    /**
+     * Contains the response from the get request in JSON format.
+     */
     String responseBody;
     public GetLocalAuthorities() throws IOException{
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/MonitoringLocalAuthority/GroupName=London/Json");
-        // Establish connection
+        // Establishes the connection.
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.connect();
-        // Get response
+        // Gets response in JSON format and stores it in the String responseBody.
         InputStream is = request.getInputStream();
         BufferedReader bf_reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -38,18 +44,22 @@ public class GetLocalAuthorities{
         responseBody = sb.toString();
     }
 
+    /**
+     * @return String containing a list of all the London Boroughs.
+     */
     public String print(){
-        JSONObject obj1 = new JSONObject(responseBody);
-        JSONObject obj2 = obj1.getJSONObject("LocalAuthorities");
-        JSONArray arr = obj2.getJSONArray("LocalAuthority");
-        StringBuilder sb2 = new StringBuilder();
-        for (int i = 0; i < arr.length(); i++){
-            JSONObject album = arr.getJSONObject(i);
-            String authorityName = album.getString("@LocalAuthorityName");
-            sb2.append(authorityName + "\n");
+        String boroughList;
+        // Navigates through responseBody to access the JSON objects each containing a borough.
+        JSONObject obj = new JSONObject(responseBody);
+        JSONObject localAuthorities = obj.getJSONObject("LocalAuthorities");
+        JSONArray localAuthority = localAuthorities.getJSONArray("LocalAuthority");
+        StringBuilder sbBoroughs = new StringBuilder();
+        for (int i = 0; i < localAuthority.length(); i++){
+            JSONObject obj2 = localAuthority.getJSONObject(i);
+            String authorityName = obj2.getString("@LocalAuthorityName");
+            sbBoroughs.append(authorityName).append("\n");
         }
-
-        String finalString = sb2.toString();
-        return finalString;
+        boroughList = sbBoroughs.toString();
+        return boroughList;
     }
 }

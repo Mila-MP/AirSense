@@ -1,7 +1,7 @@
 package AirSenseUI;
 
 import GetData.GetLocalAuthorities;
-import GetData.GetPlot;
+import GetData.GetBarChart;
 import GetData.GetPollutionIndex;
 import org.jfree.chart.ChartPanel;
 
@@ -141,7 +141,7 @@ public class PollutionHistory extends JPanel {
                     String site = (String) sitesCB.getSelectedItem();
                     String siteCode = site.substring(0, 3);
                     String species = (String) speciesCB.getSelectedItem();
-                    GetPlot plot = new GetPlot(siteCode, year, species);
+                    GetBarChart plot = new GetBarChart(siteCode, year, species);
                     String title = "Number of days in low, moderate and high bands \n in " + site.substring(4) +
                             " for " + species + " (" + year + ")";
                     plotPanel = plot.makePlot(title);
