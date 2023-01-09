@@ -15,6 +15,7 @@ public class MyInhalers extends JPanel{
     public JFrame f;
 
     protected JTable inhaler_table;
+    
     public int count;
     public boolean wait;
 
@@ -86,7 +87,9 @@ public class MyInhalers extends JPanel{
                     throw new RuntimeException(ex);
                 }
 
-
+    public String dbUrl = "jdbc:postgresql://localhost:5433/postgres";
+    // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "AirSense");
 
 
             }

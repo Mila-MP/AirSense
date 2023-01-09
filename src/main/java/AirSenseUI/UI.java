@@ -1,7 +1,6 @@
 package AirSenseUI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -13,16 +12,15 @@ public class UI extends JPanel{
     PollutionIndex pollutionPanel = new PollutionIndex();
     PollutionNews newsPanel = new PollutionNews();
     PollutionHistory pollutionHistory = new PollutionHistory();
-
-    InhalerUse inhalerUsePanel = new InhalerUse();
+    InhalerUse2 inhalerUsePanel = new InhalerUse2();
     JTabbedPane tabbedPane = new JTabbedPane();
-
-    public UI() throws IOException, SQLException, ClassNotFoundException {
-        tabbedPane.addTab("Welcome Page",welcomePanel);
+    
+    public UI() throws IOException, SQLException {
+        tabbedPane.addTab("Inhaler Use", inhalerUsePanel);
+        tabbedPane.addTab("About AirSense",welcomePanel);
         tabbedPane.addTab("Profile",profilePanel);
         tabbedPane.addTab("General Information",infoPanel);
         tabbedPane.addTab("My Inhalers",inhalerPanel);
-        tabbedPane.addTab("Inhaler Use", inhalerUsePanel);
         tabbedPane.addTab("Pollution Indices",pollutionPanel);
         tabbedPane.addTab("News",newsPanel);
         tabbedPane.addTab("Pollution History",pollutionHistory);
