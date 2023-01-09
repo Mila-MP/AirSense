@@ -22,10 +22,7 @@ public class Profile extends JPanel {
     JTextField relieverField = new JTextField();
     JTextField ageField = new JTextField();
     JTextField genderField = new JTextField();
-    JButton nameButton = new JButton("Insert name");
-    JButton relieverButton = new JButton("Insert reliever type");
-    JButton ageButton = new JButton("Insert age");
-    JButton genderButton = new JButton("Insert gender");
+    JButton InsertButton = new JButton("Insert details");
     static JComboBox<String> boroughs;
 
     public Profile() throws IOException {
@@ -41,41 +38,32 @@ public class Profile extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 0;
         add(nameField,gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        add(nameButton,gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
         add(relieverLabel,gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
         add(relieverField,gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        add(relieverButton,gbc);
         gbc.gridx = 0;
         gbc.gridy = 2;
         add(ageLabel,gbc);
         gbc.gridx = 1;
         gbc.gridy = 2;
         add(ageField,gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        add(ageButton,gbc);
         gbc.gridx = 0;
         gbc.gridy = 3;
         add(genderLabel,gbc);
         gbc.gridx = 1;
         gbc.gridy = 3;
         add(genderField,gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 3;
-        add(genderButton,gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        add(locLabel,gbc);
         gbc.gridx = 1;
         gbc.gridy = 4;
+        add(InsertButton,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        add(locLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 5;
         add(boroughs,gbc);
 
     }

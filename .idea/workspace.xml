@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19168346-8033-44b7-b751-199fccac58af" name="Changes" comment="anoja profile">
+    <list default="true" id="19168346-8033-44b7-b751-199fccac58af" name="Changes" comment="back to data fetching">
+      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/InhalerUse2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/GeneralInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/MyInhalers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/MyInhalers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,19 +86,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/AirSense/AirSense",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/AirSense/AirSense&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -146,9 +150,6 @@
       <list>
         <item itemvalue="Gradle.AirSense [run]" />
         <item itemvalue="Gradle.AirSense [build]" />
-        <item itemvalue="Gradle.AirSense [run]" />
-        <item itemvalue="Gradle.AirSense [build]" />
-        <item itemvalue="Gradle.AirSense [run]" />
       </list>
     </recent_temporary>
   </component>
@@ -174,28 +175,6 @@
       <workItem from="1671189198646" duration="1110000" />
       <workItem from="1671387339966" duration="1207000" />
     </task>
-    <task id="LOCAL-00001" summary="anoja insert profile info class">
-      <created>1672325508271</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1672325508271</updated>
-    </task>
-    <task id="LOCAL-00002" summary="anoja profile">
-      <created>1672844791506</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1672844791506</updated>
-    </task>
-    <task id="LOCAL-00003" summary="anoja profile">
-      <created>1672846702619</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1672846702619</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,10 +190,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="anoja insert profile info class" />
-    <MESSAGE value="anoja profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="anoja profile" />
   </component>
 </project>
