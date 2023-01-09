@@ -16,6 +16,8 @@ public class GeneralInfo extends JPanel {
     JButton okButton = new JButton("OK");
     JButton clearButton = new JButton("Clear");
 
+
+
     public GeneralInfo(){
         String[] choices = {"The different types of pollutants","Health effects of the different pollutants"};
         JComboBox<String> cb = new JComboBox<>(choices);
@@ -37,6 +39,7 @@ public class GeneralInfo extends JPanel {
         gbc.gridy = 2;
         add(info,gbc);
 
+
         okButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,6 +50,7 @@ public class GeneralInfo extends JPanel {
                         String healthInfo = risks.print();
                         info.setVisible(true);
                         info.setText(convertToMultiline(healthInfo));
+
 
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
@@ -59,6 +63,7 @@ public class GeneralInfo extends JPanel {
 
                         info.setVisible(true);
                         info.setText(convertToMultiline(species));
+
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }

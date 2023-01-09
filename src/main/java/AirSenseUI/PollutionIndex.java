@@ -14,6 +14,7 @@ public class PollutionIndex extends JPanel{
     JButton okButton = new JButton("OK");
     JLabel info = new JLabel();
 
+
     public PollutionIndex() throws IOException {
         setLayout(new GridBagLayout());
         GetLocalAuthorities la = new GetLocalAuthorities();
@@ -35,6 +36,7 @@ public class PollutionIndex extends JPanel{
         gbc.gridx = 0;
         gbc.gridy = 3;
         add(info,gbc);
+
 
         okButton.addMouseListener(new MouseListener() {
             @Override

@@ -4,25 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Improved UI">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/PollutionNews.java" afterDir="false" />
+
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="Data fetching Mila">
+      <change afterPath="$PROJECT_DIR$/src/main/java/InhalerUse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/PollutionIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AirSenseUI/WelcomePage.java" afterDir="false" />
-    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Inhaler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Inhaler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetLocalAuthorities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetLocalAuthorities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetPollutionIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetPollutionIndex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+
+    <list default="true" id="b4b51fbc-2fe0-4ba2-90d1-0e9464fb113c" name="Changes" comment="displays health risks on the frame">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GetNews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GetNews.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PollutionInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -76,7 +77,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Data-fetching" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,58 +95,21 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mila Pertuy/OneDrive - Imperial College London/3rd Year/BIOE60010 Programming 3/Tutorial 4/ShapeApp/ShapeApp&quot;,
-
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
-
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
-    ]
+    &quot;last_opened_file_path&quot;: &quot;C:/Prg3/AirSensePractice&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-
-      <recent name="C:\Users\Mila Pertuy\OneDrive - Imperial College London\3rd Year\BIOE60010 Programming 3\AirSense\AirSense\src\main\java\Images" />
-      <recent name="C:\Users\Mila Pertuy\OneDrive - Imperial College London\3rd Year\BIOE60010 Programming 3\AirSense\AirSense\src\main\java" />
-
-      <recent name="C:\Year 3\Programming 3\AirSense\src\main\java" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="AirSense.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="41e9b746-03e0-4522-b5d6-3fcce62980a5.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
-      <script-file value="41e9b746-03e0-4522-b5d6-3fcce62980a5.sql" />
-      <script-mode>FILE</script-mode>
-      <method v="2" />
-    </configuration>
-    <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
-      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/41e9b746-03e0-4522-b5d6-3fcce62980a5/console.sql" />
-      <script-mode>FILE</script-mode>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.AirSense [run]">
     <configuration name="AirSense [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -190,9 +154,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.AirSense [run]" />
         <item itemvalue="Gradle.AirSense [build]" />
         <item itemvalue="Gradle.AirSense [run]" />
+        <item itemvalue="Gradle.AirSense [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -209,71 +174,38 @@
       <workItem from="1669765184365" duration="229000" />
       <workItem from="1670162204362" duration="1999000" />
       <workItem from="1670180817948" duration="2692000" />
-
-      <workItem from="1670183819955" duration="7228000" />
-      <workItem from="1670243753292" duration="100000" />
-      <workItem from="1670246886924" duration="620000" />
-      <workItem from="1670316001149" duration="1726000" />
-      <workItem from="1670321368051" duration="6174000" />
-      <workItem from="1670338863350" duration="1875000" />
-      <workItem from="1670759143314" duration="2139000" />
-      <workItem from="1670761336038" duration="17166000" />
-      <workItem from="1670785153834" duration="5951000" />
-      <workItem from="1670802499699" duration="3387000" />
-      <workItem from="1670840075402" duration="2254000" />
+      <workItem from="1670183819955" duration="6761000" />
+      <workItem from="1670352627945" duration="8791000" />
+      <workItem from="1670452324366" duration="6559000" />
+      <workItem from="1670494236642" duration="6362000" />
+      <workItem from="1670503295825" duration="19201000" />
+      <workItem from="1670577928885" duration="3401000" />
+      <workItem from="1670587312736" duration="24000" />
+      <workItem from="1670605512637" duration="447000" />
     </task>
-    <task id="LOCAL-00001" summary="Pollution info">
-      <created>1670196735141</created>
+    </task>
+    <task id="LOCAL-00001" summary="to appear on github">
+      <created>1670343935156</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1670196735141</updated>
+      <updated>1670343935156</updated>
     </task>
-    <task id="LOCAL-00002" summary="Improved UI">
-      <created>1670802828817</created>
+    <task id="LOCAL-00002" summary="Added GetHealthRisks class that prints out the health risk for each pollutant">
+      <created>1670346002628</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1670802828817</updated>
+      <updated>1670346002628</updated>
     </task>
-    <task id="LOCAL-00003" summary="Improved UI">
-      <created>1670805790024</created>
+    <task id="LOCAL-00003" summary="displays health risks on the frame">
+      <created>1670365684433</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1670805790024</updated>
+      <updated>1670365684433</updated>
     </task>
-    <task id="LOCAL-00004" summary="Improved UI">
-      <created>1670805843686</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1670805843686</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
-
-      <workItem from="1670183819955" duration="6761000" />
-      <workItem from="1670266754278" duration="17000" />
-      <workItem from="1670338937372" duration="1923000" />
-      <workItem from="1670343264184" duration="88000" />
-      <workItem from="1670343892097" duration="1130000" />
-      <workItem from="1670345038928" duration="357000" />
-      <workItem from="1670346447490" duration="2640000" />
-      <workItem from="1670349243768" duration="1152000" />
-      <workItem from="1670365931656" duration="5912000" />
-      <workItem from="1670409824384" duration="54000" />
-      <workItem from="1670498654233" duration="17000" />
-      <workItem from="1670606173748" duration="527000" />
-      <workItem from="1670776269594" duration="18779000" />
-    </task>
-    <task id="LOCAL-00001" summary="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler">
-      <created>1670782053600</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1670782053600</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,20 +216,50 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Data-fetching-Mila" />
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Pollution info" />
-    <MESSAGE value="Improved UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved UI" />
+
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AirSense$AirSense__run_.ic" NAME="AirSense [run] Coverage Results" MODIFIED="1670528814529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <MESSAGE value="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler" />
-    <option name="LAST_COMMIT_MESSAGE" value="data_storage - added ability to add inhalers to inhaler database&#10;Still unable to add data specific to each inhaler" />
+
+    <MESSAGE value="to appear on github" />
+    <MESSAGE value="Added GetHealthRisks class that prints out the health risk for each pollutant" />
+    <MESSAGE value="displays health risks on the frame" />
+    <option name="LAST_COMMIT_MESSAGE" value="displays health risks on the frame" />
   </component>
 </project>

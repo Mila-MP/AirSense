@@ -10,10 +10,18 @@ public class UI extends JPanel{
     MyInhalers inhalerPanel = new MyInhalers();
     PollutionIndex pollutionPanel = new PollutionIndex();
     PollutionNews newsPanel = new PollutionNews();
+
     PollutionHistory pollutionHistory = new PollutionHistory();
     JTabbedPane tabbedPane = new JTabbedPane();
 
+
+
+
+
+
+
     public UI() throws IOException {
+
         tabbedPane.addTab("Welcome Page",welcomePanel);
         tabbedPane.addTab("Profile",profilePanel);
         tabbedPane.addTab("General Information",infoPanel);
