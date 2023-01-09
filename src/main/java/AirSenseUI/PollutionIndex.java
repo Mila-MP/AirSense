@@ -29,6 +29,7 @@ public class PollutionIndex extends JPanel{
     Font title = new Font("Ubuntu",Font.PLAIN,15);
     Font body = new Font("Ubuntu", Font.PLAIN,13);
 
+
     public PollutionIndex() throws IOException {
         // ComboBox Initialisation
         GetLocalAuthorities la = new GetLocalAuthorities();
@@ -75,9 +76,12 @@ public class PollutionIndex extends JPanel{
         gbc.gridy = 3;
         add(empty2,gbc);
 
+
+
         gbc.gridx = 0;
         gbc.gridy = 4;
         add(boroughPanel,gbc);
+
 
         gbc.gridx = 0;
         gbc.gridy = 5;

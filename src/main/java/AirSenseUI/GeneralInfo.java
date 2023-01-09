@@ -14,9 +14,13 @@ public class GeneralInfo extends JPanel {
     JTextArea info = new JTextArea();
 
 
+
+
+
     public GeneralInfo() throws IOException {
 
         String[] choices = {"The different types of pollutants measured","Health effects of the different pollutants"};
+
         JComboBox<String> cb = new JComboBox<>(choices);
 
         GetSpecies species = new GetSpecies();
@@ -53,8 +57,9 @@ public class GeneralInfo extends JPanel {
                     throw new RuntimeException(ex);
                 }
 
-            }
-        });
+
+
+    
 
         cb2.addActionListener(e -> {
             int index = cb2.getSelectedIndex();
@@ -63,14 +68,24 @@ public class GeneralInfo extends JPanel {
                     try {
                         GetHealthRisks risk = new GetHealthRisks("CO");
                         info.setText(risk.print());
+
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                     break;
                 case 1:
                     try {
+
+                        GetSpecies a = new GetSpecies();
+                        String species = a.print();
+
+                        info.setVisible(true);
+                        info.setText(convertToMultiline(species));
+
+
                         GetHealthRisks risk = new GetHealthRisks("NO2");
                         info.setText(risk.print());
+
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }

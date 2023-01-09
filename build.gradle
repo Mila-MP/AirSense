@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+
 }
 
 application{
@@ -21,6 +22,17 @@ dependencies {
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
     implementation group: 'org.json', name: 'json', version: '20140107'
+
+    implementation 'com.formdev:flatlaf:2.6'
+    implementation 'com.formdev:flatlaf-extras:2.6'
+    implementation 'com.formdev:flatlaf-intellij-themes:2.6'
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation group: 'org.json', name: 'json', version: '20140107'
+    runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+  //  implemetation group: 'com.google.code.gson',name:'gson', version:'2.7'
+    implementation('net.sourceforge.htmlunit:htmlunit:2.51.0')
+    //implementation("com.google.guava:guava:24.0-jre")
+
     implementation 'com.formdev:flatlaf:3.0'
     implementation 'com.formdev:flatlaf-extras:3.0'
     implementation 'com.formdev:flatlaf-intellij-themes:3.0'
@@ -29,6 +41,7 @@ dependencies {
     implementation group: 'com.google.code.gson',name:'gson', version: '2.10'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
     implementation group: 'de.erichseifert.gral', name: 'gral-core', version: '0.11'
+
 }
 
 test {
