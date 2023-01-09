@@ -1,3 +1,5 @@
+import StoreData.Inhaler;
+
 public class User {
     String name;
     String age;

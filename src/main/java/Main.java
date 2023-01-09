@@ -3,31 +3,32 @@ import AirSenseUI.UI;
 import GetData.GetNews;
 import GetData.GetNewsScraper;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
-
 import javax.swing.*;
-import java.io.IOException;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class Main {
 
-    public static void main(String[] args) throws IOException{
+
+    public static void main(String[] args) throws Exception {
+
+        Inhaler test_inhaler = new Inhaler("test","2012-11-11",200);
 
 
         // Initialises Look and Feel
+        
         try {
-           UIManager.setLookAndFeel( new FlatSolarizedDarkIJTheme());
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
+            UIManager.setLookAndFeel(new FlatSolarizedDarkIJTheme());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
 
         // Creates frame
-        JFrame frame= new JFrame("AirSense");
-        frame.setSize(1000,500);
+        JFrame frame = new JFrame("AirSense");
+        frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
         UI page = new UI();
@@ -62,6 +63,14 @@ public class Main {
 
 
         }
+
+        // Puts UI on frame
+        UI page = new UI();
+        frame.add(page);
+    }
+}
+
+
 
 
 

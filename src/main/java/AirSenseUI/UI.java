@@ -2,6 +2,7 @@ package AirSenseUI;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class UI extends JPanel{
     WelcomePage welcomePanel = new WelcomePage();
@@ -12,17 +13,16 @@ public class UI extends JPanel{
     PollutionNews newsPanel = new PollutionNews();
 
     PollutionHistory pollutionHistory = new PollutionHistory();
+    InhalerUse2 inhalerUsePanel = new InhalerUse2();
     JTabbedPane tabbedPane = new JTabbedPane();
 
 
 
 
-
-
-
-    public UI() throws IOException {
-
-        tabbedPane.addTab("Welcome Page",welcomePanel);
+    
+    public UI() throws IOException, SQLException {
+        tabbedPane.addTab("Inhaler Use", inhalerUsePanel);
+        tabbedPane.addTab("About AirSense",welcomePanel);
         tabbedPane.addTab("Profile",profilePanel);
         tabbedPane.addTab("General Information",infoPanel);
         tabbedPane.addTab("My Inhalers",inhalerPanel);
