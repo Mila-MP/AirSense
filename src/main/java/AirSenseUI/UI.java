@@ -14,7 +14,7 @@ public class UI extends JPanel{
     PollutionHistory pollutionHistory = new PollutionHistory();
     InhalerUse2 inhalerUsePanel = new InhalerUse2();
     JTabbedPane tabbedPane = new JTabbedPane();
-
+    
     public UI() throws IOException, SQLException {
         tabbedPane.addTab("Inhaler Use", inhalerUsePanel);
         tabbedPane.addTab("About AirSense",welcomePanel);
