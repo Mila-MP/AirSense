@@ -12,7 +12,6 @@ public class UI extends JPanel{
     PollutionIndex pollutionPanel = new PollutionIndex();
     PollutionNews newsPanel = new PollutionNews();
     PollutionHistory pollutionHistory = new PollutionHistory();
-
     InhalerUse2 inhalerUsePanel = new InhalerUse2();
     JTabbedPane tabbedPane = new JTabbedPane();
 

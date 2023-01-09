@@ -3,8 +3,8 @@
 package AirSenseUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -31,7 +31,7 @@ public class InhalerUse2 extends JPanel{
 
         Object[] row = new Object[2];
 
-        used.addMouseListener(new MouseListener() {
+        used.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 count += 1;
@@ -39,25 +39,6 @@ public class InhalerUse2 extends JPanel{
                 row[0] = dtf.format(now);
                 row[1] = number.getText();
                 model.addRow(row);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
 
             }
         });
