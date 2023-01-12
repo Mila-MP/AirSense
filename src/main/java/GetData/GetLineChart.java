@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GetLineChart {
     /**
@@ -73,19 +74,101 @@ public class GetLineChart {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String measurementDate;
         String monthNumber;
-        String[] months = new String[]{
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        ArrayList<Double> jan = new ArrayList<>();
+        Double meanJan;
+        ArrayList<Double> feb = new ArrayList<>();
+        Double meanFeb;
+        ArrayList<Double> mar = new ArrayList<>();
+        Double meanMar;
+        ArrayList<Double> apr = new ArrayList<>();
+        Double meanApr;
+        ArrayList<Double> may = new ArrayList<>();
+        Double meanMay;
+        ArrayList<Double> jun = new ArrayList<>();
+        Double meanJun;
+        ArrayList<Double> jul = new ArrayList<>();
+        Double meanJul;
+        ArrayList<Double> aug = new ArrayList<>();
+        Double meanAug;
+        ArrayList<Double> sep = new ArrayList<>();
+        Double meanSep;
+        ArrayList<Double> oct = new ArrayList<>();
+        Double meanOct;
+        ArrayList<Double> nov = new ArrayList<>();
+        Double meanNov;
+        ArrayList<Double> dec = new ArrayList<>();
+        Double meanDec;
+
         // Navigates through responseBody to access the relevant data
         JSONObject obj = new JSONObject(responseBody);
         JSONObject rawAQdata = obj.getJSONObject("RawAQData");
         JSONArray data = rawAQdata.getJSONArray("Data");
         for (int i = 0; i < data.length(); i++){
             JSONObject obj2 = data.getJSONObject(i);
-            measurementDate = obj2.getString("@MeasurementDateGMT");
-            monthNumber = measurementDate.substring(5,7);
+            if (obj2.getString("@Value").isEmpty()){}
+            // If @Value string isn't empty, adds data to relevant month list
+            else {
+                measurementDate = obj2.getString("@MeasurementDateGMT");
+                monthNumber = measurementDate.substring(5, 7);
+                switch (Integer.parseInt(monthNumber)) {
+                    case 1 -> jan.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 2 -> feb.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 3 -> mar.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 4 -> apr.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 5 -> may.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 6 -> jun.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 7 -> jul.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 8 -> aug.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 9 -> sep.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 10 -> oct.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 11 -> nov.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 12 -> dec.add(Double.parseDouble(obj2.getString("@Value")));
+                }
+            }
         }
+        meanJan = getMean(jan);
+        meanFeb = getMean(feb);
+        meanMar = getMean(mar);
+        meanApr = getMean(apr);
+        meanMay = getMean(may);
+        meanJun = getMean(jun);
+        meanJul = getMean(jul);
+        meanAug = getMean(aug);
+        meanSep = getMean(sep);
+        meanOct = getMean(oct);
+        meanNov = getMean(nov);
+        meanDec = getMean(dec);
+
+        dataset.addValue(meanJan, species, "Jan");
+        dataset.addValue(meanFeb, species, "Feb");
+        dataset.addValue(meanMar, species, "Mar");
+        dataset.addValue(meanApr, species, "Apr");
+        dataset.addValue(meanMay, species, "May");
+        dataset.addValue(meanJun, species, "Jun");
+        dataset.addValue(meanJul, species, "Jul");
+        dataset.addValue(meanAug, species, "Aug");
+        dataset.addValue(meanSep, species, "Sep");
+        dataset.addValue(meanOct, species, "Oct");
+        dataset.addValue(meanNov, species, "Nov");
+        dataset.addValue(meanDec, species, "Dec");
+
         return dataset;
+    }
+
+    /**
+     *
+     * @param arr The array
+     * @return Mean of arr
+     */
+    public Double getMean(ArrayList<Double> arr){
+        double tot = 0;
+        int N = arr.size();
+        double mean;
+        for (Double value : arr) {
+            tot += value;
+        }
+        mean = tot/N;
+        return mean;
     }
 
     /**
@@ -96,8 +179,8 @@ public class GetLineChart {
     public ChartPanel makePlot(String title){
         JFreeChart chart = ChartFactory.createLineChart(
                 title,
-                species,
-                "Pollution Index",
+                "Monthly Average",
+                "Concentration",
                 createDataset(),
                 PlotOrientation.VERTICAL,
                 true, true, false);

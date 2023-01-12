@@ -11,8 +11,6 @@ import java.sql.Statement;
 
 public class Profile extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
-    String name;
-    String location;
     JLabel nameLabel = new JLabel("Name:");
     JLabel relieverLabel = new JLabel("Reliever:");
     JLabel ageLabel = new JLabel("Age:");
@@ -67,14 +65,10 @@ public class Profile extends JPanel {
         add(boroughs,gbc);
 
     }
-
-
-
-
     public void main(String[] args) {
         try {
             String url = "jdbc:postgresql://localhost:5433/postgres";
-            Connection conn = DriverManager.getConnection(url,"postgres","AirSense");
+            Connection conn = DriverManager.getConnection(url,"postgres","Il8S741v");
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO users_ " +
                     "VALUES ("+nameField+", "+relieverField+", "+ageField+", "+genderField+", "+locLabel+")");

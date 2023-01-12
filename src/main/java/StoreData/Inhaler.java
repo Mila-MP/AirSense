@@ -3,9 +3,6 @@ package StoreData;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-
 
 public class Inhaler {
 
@@ -15,13 +12,9 @@ public class Inhaler {
     public int puffs_taken;
     public int usage_count;
 
-    public int inhaler_id;
-
-
-
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
@@ -152,7 +145,7 @@ public class Inhaler {
                     /* Checking if the current input is within 30 minutes */
                     System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
                     System.out.println("Here we are checking if we should group  the inputs together");
-                    if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))) == false) {
+                    if (!last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))) {
                         // If it is, we now combine this input and the last input
                         System.out.println("We are combining the inputs");
                         System.out.println(last_id);
@@ -183,7 +176,7 @@ public class Inhaler {
         } finally {
             Boolean output_msg = use_count();
 
-            if (output_msg == true){
+            if (output_msg){
                 System.out.println("Based on NHS guidance it is recommended that you see your doctor about your asthma, you have used your inhaler a total of " +usage_count+" times this week");
             }
             else{
