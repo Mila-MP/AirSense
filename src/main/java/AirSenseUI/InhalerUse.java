@@ -11,9 +11,10 @@ public class InhalerUse extends JPanel {
     JPanel buttonPanel = new JPanel();
     JButton usedButton = new JButton("I just used my Inhaler");
     JButton refreshButton = new JButton("Refresh page");
+    JFrame f;
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public InhalerUse() throws SQLException{
         JTable use_table = new JTable(refresh_model());
@@ -39,6 +40,7 @@ public class InhalerUse extends JPanel {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+
             String query2 = "SELECT * FROM inhalers";
             ResultSet rs2;
             try {
@@ -55,6 +57,10 @@ public class InhalerUse extends JPanel {
             try {
                 current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
             } catch (SQLException ex) {
+                JFrame f=new JFrame();
+                JOptionPane.showMessageDialog(f,"You Haven't Logged An Inhaler Yet.","Alert",JOptionPane.WARNING_MESSAGE);
+
+                System.out.println("Yes");
                 throw new RuntimeException(ex);
             } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
