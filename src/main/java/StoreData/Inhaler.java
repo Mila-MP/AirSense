@@ -11,7 +11,6 @@ public class Inhaler {
     public int puffs_taken;
     public int usage_count;
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
-    // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
@@ -20,9 +19,10 @@ public class Inhaler {
         this.puffs_left = quantity;
     }
 
+    /**
+     * The aim of this function is to add an inhaler to the database
+     */
     public void add_inhaler() throws ClassNotFoundException, SQLException {
-        /* The aim of this function is to add an inhaler to the database
-        */
         // Registering the driver
         Class.forName("org.postgresql.Driver");
 
@@ -31,16 +31,17 @@ public class Inhaler {
         s1.close();
     }
 
+    /**
+     * The aim of this function is to count how many times the user uses their inhaler in a week
+     * @return will return false if less than 3 times, and return true if more than 3 times a week
+     */
+
     public Boolean use_count() throws SQLException, ClassNotFoundException {
-        /* The aim of this function is to count how many times the user uses their inhaler in a week
-         will return false if less than 3 times, and return true if more than 3 times a week
-         */
+
         // Retrieving the data values
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery("select * from use_data");
-
-        System.out.println("Here we are comparing the dates of recorded uses");
         usage_count = 0;
         while (rs.next()) {
             // Checking if date in table is 7 days before date it is currently
@@ -51,8 +52,13 @@ public class Inhaler {
         return usage_count >= 3;
 
     }
+
+    /**
+     * This function returns true if the quantity of an inhaler in the inhaler table runs below 25 puffs left
+     * @return true if warning needs to take place
+     */
     public Boolean quantity_warning() throws ClassNotFoundException, SQLException {
-        /* This function returns true if the quantity of an inhaler in the inhaler table runs below 25 puffs left*/
+
         // Retrieving the data values
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
@@ -66,24 +72,18 @@ public class Inhaler {
         return warning;
     }
 
+    /**
+     * The aim of this function is to input the uses of the user
+     *   If function is called again within 30 minutes of its last call, it will add the puffs_taken of the
+     *   current input to the last input
+     * @param puffs_taken no_of_puffs - which defaults to 1
+     */
     public void use_input(int puffs_taken) throws Exception {
-        /* The aim of this function is to input the uses of the user
-        The table written in Postgresql has the following inputs:
-        no_of_puffs - which defaults to 1
-        use_date - which takes the current time in which use_input is called
 
-        If function is called again within 30 minutes of its last call, it will add the puffs_taken of the current input
-        to the last input
-         */
         this.puffs_taken = puffs_taken;
 
 
-        /* Formatting the database correctly
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);*/
-
-        /* Need to change the date format, so we can group uses together */
-        // Change to correct format
+        // Change date to correct format
         LocalDateTime current_time = LocalDateTime.now();
         System.out.println(current_time);
 
@@ -94,7 +94,6 @@ public class Inhaler {
 
             Statement s = conn.createStatement();
 
-            // Updating the quantity on the inhaler table
             // Retrieving the current quantity
             ResultSet rs1 = s.executeQuery("SELECT * FROM inhalers WHERE inhaler_type ='"+this.inhaler_name+"'");
 
@@ -102,13 +101,13 @@ public class Inhaler {
             rs1.next();
             int updated_puff_no = rs1.getInt("quantity")-this.puffs_taken;
             System.out.print(updated_puff_no);
+
             // Updating table with new quantity
             s.executeUpdate("UPDATE inhalers SET quantity = "+updated_puff_no+" WHERE inhaler_type ='"+this.inhaler_name+"'");
 
-
             // Selecting the latest use
             ResultSet rs = s.executeQuery("select * from use_data ORDER BY use_date DESC LIMIT 1");
-            //Rewrite of retrieving values
+
             // Empty database check
             ResultSet rs_empty = s.executeQuery("SELECT count(*) FROM use_data");
             rs_empty.next();
@@ -138,9 +137,7 @@ public class Inhaler {
                         int current_puffs = rs.getInt("no_of_puffs");
                         int new_puff_no = current_puffs + this.puffs_taken;
 
-                    /* Changing the number of puffs taken in the table for the current use - Use executeUpdate
-                    as we are not expecting to have any values returned
-                     */
+                    /* Changing the number of puffs taken in the table for the current use */
                         s.executeUpdate("UPDATE use_data SET no_of_puffs = " + new_puff_no + " WHERE id = " + last_id + ";");
                     } else {
                         System.out.println("We are NOT combining the inputs");
@@ -173,29 +170,5 @@ public class Inhaler {
 
 }
 
-/* Creating a tables - input this into your query console
-
-        create table inhalers(
-        id serial primary key,
-        inhaler_type varchar(128) NOT NULL,
-        expiry_date varchar(128) NOT NULL,
-        quantity int NOT NULL
-        );
-
-        create table use_data(
-        id serial primary key,
-        use_date DATE NOT NULL DEFAULT CURRENT_DATE,
-        no_of_puffs int NOT NULL
-        );
-
-   /* Table reset
-   TRUNCATE TABLE use_data;
-
-insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '9',3);
-insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '7',2);
-insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '5',1);
-
-TRUNCATE TABLE inhalers;
- */
 
 
