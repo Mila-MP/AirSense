@@ -63,7 +63,14 @@ public class InhalerUse extends JPanel {
             Inhaler current;
             try {
                 current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
-            } catch (SQLException | ClassNotFoundException ex) {
+
+            } catch (SQLException ex) {
+                JFrame f=new JFrame();
+                JOptionPane.showMessageDialog(f,"You Haven't Logged An Inhaler Yet.","Alert",JOptionPane.WARNING_MESSAGE);
+
+                System.out.println("Yes");
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
 
@@ -130,7 +137,8 @@ public class InhalerUse extends JPanel {
 
         ResultSet rs2 = s.executeQuery(query2);
         while (rs2.next()) {
-            model.insertRow(0, new Object[]{rs2.getString("use_date"), rs2.getInt("no_of_puffs")});
+            model.insertRow(0, new Object[]{rs2.getTimestamp("use_date").toLocalDateTime().format(
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), rs2.getInt("no_of_puffs")});
         }
         return model;
     }

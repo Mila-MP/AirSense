@@ -11,6 +11,7 @@ import StoreData.Inhaler;
  * The MyInhalers class provides the user interface for the MyInhalers tab.
  */
 public class MyInhalers extends JPanel{
+
     public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
     public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
     JButton refreshButton = new JButton("Refresh Inhaler data");

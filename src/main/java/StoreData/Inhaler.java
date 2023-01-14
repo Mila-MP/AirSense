@@ -10,8 +10,10 @@ public class Inhaler {
     public int puffs_left;
     public int puffs_taken;
     public int usage_count;
+
     public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
     public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
+
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
@@ -111,7 +113,6 @@ public class Inhaler {
             // Selecting the latest use
             ResultSet rs = s.executeQuery("select * from use_data ORDER BY use_date DESC LIMIT 1");
             //Rewrite of retrieving values
-            // Empty database check
             ResultSet rs_empty = s.executeQuery("SELECT count(*) FROM use_data");
             rs_empty.next();
             if (rs_empty.getInt(1) == 0){
