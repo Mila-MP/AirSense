@@ -116,9 +116,14 @@ public class PollutionIndex extends JPanel{
 
     }
 
+    /* Reference 2 - taken from https://stackoverflow.com/questions/2152742/java-swing-multiline-labels */
+    /**
+     * @param orig String
+     * @return String with \n replaced with <br>
+     */
     public static String convertToMultiline(String orig)
     {
         return "<html>" + orig.replaceAll("\n", "<br>");
-        // Find link for code
+
     }
 }

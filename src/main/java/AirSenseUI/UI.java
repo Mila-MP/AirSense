@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * The UI class provides the user interface for all the tabs.
+ */
 public class UI extends JPanel{
     WelcomePage welcomePanel = new WelcomePage();
     Profile profilePanel = new Profile();
@@ -15,16 +18,12 @@ public class UI extends JPanel{
     InhalerUse inhalerUsePanel = new InhalerUse();
     JTabbedPane tabbedPane = new JTabbedPane();
 
-
-
-
-    
     public UI() throws IOException, SQLException{
         tabbedPane.addTab("Inhaler Use", inhalerUsePanel);
+        tabbedPane.addTab("My Inhalers",inhalerPanel);
         tabbedPane.addTab("About AirSense",welcomePanel);
         tabbedPane.addTab("Profile",profilePanel);
         tabbedPane.addTab("General Information",infoPanel);
-        tabbedPane.addTab("My Inhalers",inhalerPanel);
         tabbedPane.addTab("Pollution Indices",pollutionPanel);
         tabbedPane.addTab("News",newsPanel);
         tabbedPane.addTab("Pollution History",pollutionHistory);

@@ -91,7 +91,6 @@ public class Profile extends JPanel {
             gbc.gridx = 1;
             gbc.gridy = 5;
             add(profileinfo, gbc);
-
         }
 
     }
