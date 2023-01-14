@@ -10,8 +10,8 @@ public class Inhaler {
     public int puffs_left;
     public int puffs_taken;
     public int usage_count;
-    public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
+    public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
+    public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
@@ -21,11 +21,13 @@ public class Inhaler {
 
     /**
      * The aim of this function is to add an inhaler to the database
+     * The add_inhaler method adds an inhaler to the database.
+     * @throws ClassNotFoundException
+     * @throws SQLException
      */
     public void add_inhaler() throws ClassNotFoundException, SQLException {
         // Registering the driver
         Class.forName("org.postgresql.Driver");
-
         Statement s1 = conn.createStatement();
         s1.executeUpdate("INSERT INTO inhalers (inhaler_type,expiry_date,quantity) VALUES ('"+this.inhaler_name+"','"+this.inhaler_expiry+"',"+this.puffs_left+")");
         s1.close();
@@ -35,9 +37,7 @@ public class Inhaler {
      * The aim of this function is to count how many times the user uses their inhaler in a week
      * @return will return false if less than 3 times, and return true if more than 3 times a week
      */
-
     public Boolean use_count() throws SQLException, ClassNotFoundException {
-
         // Retrieving the data values
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
@@ -50,20 +50,20 @@ public class Inhaler {
             }
         }
         return usage_count >= 3;
-
     }
 
     /**
-     * This function returns true if the quantity of an inhaler in the inhaler table runs below 25 puffs left
-     * @return true if warning needs to take place
+     *
+     * @return true if the quantity of inhaler is below 25, false otherwise.
+     * @throws ClassNotFoundException
+     * @throws SQLException
      */
     public Boolean quantity_warning() throws ClassNotFoundException, SQLException {
-
         // Retrieving the data values
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
-        ResultSet rs = s.executeQuery("select * from use_data");
-        boolean warning = false;
+        ResultSet rs = s.executeQuery("select * from inhalers");
+        Boolean warning = false;
         while(rs.next()){
             if(rs.getInt("quantity") < 25){
                 warning = true;
@@ -79,19 +79,15 @@ public class Inhaler {
      * @param puffs_taken no_of_puffs - which defaults to 1
      */
     public void use_input(int puffs_taken) throws Exception {
-
         this.puffs_taken = puffs_taken;
-
 
         // Change date to correct format
         LocalDateTime current_time = LocalDateTime.now();
         System.out.println(current_time);
 
-
         try {
             // Registering the driver
             Class.forName("org.postgresql.Driver");
-
             Statement s = conn.createStatement();
 
             // Retrieving the current quantity
@@ -100,7 +96,6 @@ public class Inhaler {
             // Calculating new quantity
             rs1.next();
             int updated_puff_no = rs1.getInt("quantity")-this.puffs_taken;
-            System.out.print(updated_puff_no);
 
             // Updating table with new quantity
             s.executeUpdate("UPDATE inhalers SET quantity = "+updated_puff_no+" WHERE inhaler_type ='"+this.inhaler_name+"'");
@@ -114,61 +109,36 @@ public class Inhaler {
             rs_empty.next();
             if (rs_empty.getInt(1) == 0){
                 String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES ("+puffs_taken+")";
-                System.out.println(sqlStr);
                 s.executeUpdate(sqlStr);
             }
             else {
                 while (rs.next()) {
-                    System.out.println(rs.getTimestamp("use_date"));
                     LocalDateTime last_date = rs.getTimestamp("use_date").toLocalDateTime();
                     LocalDateTime temp_time = LocalDateTime.now();
-                    System.out.println("This is the last date:" + last_date);
-                    System.out.println("This is the current date minus 30 mins:" + temp_time.minus(Duration.ofMinutes(30)));
-
                     int last_id = rs.getInt("id");
 
                     /* Checking if the current input is within 30 minutes */
-                    System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
-                    System.out.println("Here we are checking if we should group  the inputs together");
                     if (!last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))) {
-                        // If it is, we now combine this input and the last input
-                        System.out.println("We are combining the inputs");
-                        System.out.println(last_id);
 
+                        // If it is, we now combine this input and the last input
                         int current_puffs = rs.getInt("no_of_puffs");
                         int new_puff_no = current_puffs + this.puffs_taken;
 
                     /* Changing the number of puffs taken in the table for the current use */
+
                         s.executeUpdate("UPDATE use_data SET no_of_puffs = " + new_puff_no + " WHERE id = " + last_id + ";");
                     } else {
-                        System.out.println("We are NOT combining the inputs");
-
                         // Inputting the current use
                         String sqlStr = "INSERT INTO use_data (no_of_puffs) VALUES (" + puffs_taken + ")";
-                        System.out.println(sqlStr);
                         s.executeUpdate(sqlStr);
                     }
                 }
             }
-
-
             s.close();
+        } catch(Exception e){
 
-
-
-        } finally {
-            Boolean output_msg = use_count();
-
-            if (output_msg){
-                System.out.println("Based on NHS guidance it is recommended that you see your doctor about your asthma, you have used your inhaler a total of " +usage_count+" times this week");
-            }
-            else{
-                System.out.println("Thank you for your input, you have used your inhaler a total of "+usage_count+" times this week");
-            }
         }
-
     }
-
 }
 
 

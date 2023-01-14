@@ -7,36 +7,40 @@ import java.awt.*;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The InhalerUse class provides the user interface for the Inhaler Use tab.
+ */
 public class InhalerUse extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
     JPanel buttonPanel = new JPanel();
     JButton usedButton = new JButton("I just used my Inhaler");
     JButton refreshButton = new JButton("Refresh page");
-
-    public String dbUrl = "jdbc:postgresql://localhost:5433/postgres";
-    // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "AirSense");
-
+    JLabel txt = new JLabel();
+    public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
+    public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
 
     public InhalerUse() throws SQLException{
-        JTable use_table = new JTable(refresh_model());
-        JScrollPane scrollPane = new JScrollPane(use_table);
-        use_table.setFillsViewportHeight(true);
+        // Table initialisation
+        JTable useTable = new JTable(refreshModel());
+        JScrollPane scrollPane = new JScrollPane(useTable);
+        useTable.setFillsViewportHeight(true);
 
-        JLabel txt = new JLabel();
-
+        // Sub panel configuration
         buttonPanel.setLayout(new GridLayout(3,1));
         buttonPanel.add(usedButton);
         buttonPanel.add(refreshButton);
         buttonPanel.add(txt);
 
+        // Main panel configuration
         setLayout(new GridBagLayout());
         gbc.gridx = 0; gbc.gridy = 0; add(scrollPane,gbc);
         gbc.gridx = 1; gbc.gridy = 0; add(buttonPanel,gbc);
 
+        // Button configuration
         usedButton.addActionListener(e -> {
             // Creation of inhaler with qualities found in the first row of myInhalers
             Statement s;
+
             try {
                 s = conn.createStatement();
             } catch (SQLException ex) {
@@ -50,11 +54,13 @@ public class InhalerUse extends JPanel {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+
             try {
                 rs2.next();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+
             Inhaler current;
             try {
                 current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
@@ -68,6 +74,7 @@ public class InhalerUse extends JPanel {
             } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
+
             try {
                 current.use_count();
             } catch (SQLException | ClassNotFoundException ex) {
@@ -76,11 +83,20 @@ public class InhalerUse extends JPanel {
 
             try {
                 if (current.use_count()) {
-                    txt.setText("Based on NHS guidance you should contact your doctor");
+                    JOptionPane.showMessageDialog(null,"Based on NHS guidance you should contact your doctor","Warning",JOptionPane.WARNING_MESSAGE);
                 } else {
                     txt.setText("Thank you for your input");
                 }
             } catch (SQLException | ClassNotFoundException ex) {
+
+                throw new RuntimeException(ex);
+            }
+
+            try {
+                if (current.quantity_warning()){
+                    JOptionPane.showMessageDialog(null,"Your inhaler has less than 25 doses left","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
                 throw new RuntimeException(ex);
             }
 
@@ -92,25 +108,28 @@ public class InhalerUse extends JPanel {
 
             // Refresh of table
             try {
-                use_table.setModel(refresh_model());
+                useTable.setModel(refreshModel());
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
 
         });
+
         refreshButton.addActionListener(e -> {
             try {
-                use_table.setModel(refresh_model());
+                useTable.setModel(refreshModel());
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
         });
-
     }
-    public DefaultTableModel refresh_model() throws SQLException {
-        /* The purpose of this function is to refresh the table displayed on the UI. It does this by creating a new table model
-        which can then be assigned to the appropriate JTable
-         */
+
+    /**
+     * The method refreshModel refreshes the table displayed on the UI.
+     * @return table model
+     * @throws SQLException
+     */
+    public DefaultTableModel refreshModel() throws SQLException {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Use date");
         model.addColumn("Number of puffs");
