@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The InhalerUse class provides the user interface for the Inhaler Use tab.
@@ -87,6 +88,7 @@ public class InhalerUse extends JPanel {
                     txt.setText("Thank you for your input");
                 }
             } catch (SQLException | ClassNotFoundException ex) {
+
                 throw new RuntimeException(ex);
             }
 
@@ -137,6 +139,7 @@ public class InhalerUse extends JPanel {
 
         ResultSet rs2 = s.executeQuery(query2);
         while (rs2.next()) {
+            // Adds each row in use_data table to the table model, use_date column is changed to an appropriate format
             model.insertRow(0, new Object[]{rs2.getTimestamp("use_date").toLocalDateTime().format(
                     DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), rs2.getInt("no_of_puffs")});
         }

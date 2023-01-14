@@ -10,10 +10,8 @@ public class Inhaler {
     public int puffs_left;
     public int puffs_taken;
     public int usage_count;
-
     public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
     public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
-
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
@@ -22,10 +20,10 @@ public class Inhaler {
     }
 
     /**
+     * The aim of this function is to add an inhaler to the database
      * The add_inhaler method adds an inhaler to the database.
      * @throws ClassNotFoundException
      * @throws SQLException
-     *
      */
     public void add_inhaler() throws ClassNotFoundException, SQLException {
         // Registering the driver
@@ -36,31 +34,22 @@ public class Inhaler {
     }
 
     /**
-     *
-     * @return false if the inhaler is used less than 3 times in a week, true if inhaler is used
-     * 3 times or more a week.
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * The aim of this function is to count how many times the user uses their inhaler in a week
+     * @return will return false if less than 3 times, and return true if more than 3 times a week
      */
     public Boolean use_count() throws SQLException, ClassNotFoundException {
         // Retrieving the data values
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery("select * from use_data");
-
         usage_count = 0;
         while (rs.next()) {
             // Checking if date in table is 7 days before date it is currently
-            if (rs.getTimestamp("use_date").toLocalDateTime().isBefore(LocalDateTime.now().minus(Duration.ofDays(7))) == false) {
+            if (!rs.getTimestamp("use_date").toLocalDateTime().isBefore(LocalDateTime.now().minus(Duration.ofDays(7)))) {
                 usage_count = usage_count + 1;
             }
         }
-        if (usage_count >= 3) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return usage_count >= 3;
     }
 
     /**
@@ -84,16 +73,17 @@ public class Inhaler {
     }
 
     /**
-     * Inputs the inhaler uses of the user in the table. If the function is called again within
-     * 30 minutes of its last call, it will add 1 to puffs_taken.
-     * @param puffs_taken defaults to one
-     * @throws Exception
+     * The aim of this function is to input the uses of the user
+     *   If function is called again within 30 minutes of its last call, it will add the puffs_taken of the
+     *   current input to the last input
+     * @param puffs_taken no_of_puffs - which defaults to 1
      */
     public void use_input(int puffs_taken) throws Exception {
         this.puffs_taken = puffs_taken;
 
+        // Change date to correct format
         LocalDateTime current_time = LocalDateTime.now();
-        LocalDateTime check_time = current_time.minusMinutes(30);
+        System.out.println(current_time);
 
         try {
             // Registering the driver
@@ -112,7 +102,9 @@ public class Inhaler {
 
             // Selecting the latest use
             ResultSet rs = s.executeQuery("select * from use_data ORDER BY use_date DESC LIMIT 1");
-            //Rewrite of retrieving values
+
+
+            // Empty database check
             ResultSet rs_empty = s.executeQuery("SELECT count(*) FROM use_data");
             rs_empty.next();
             if (rs_empty.getInt(1) == 0){
@@ -125,11 +117,15 @@ public class Inhaler {
                     LocalDateTime temp_time = LocalDateTime.now();
                     int last_id = rs.getInt("id");
 
-                    // Checking if the current input is within 30 minutes
-                    if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))==false) {
+                    /* Checking if the current input is within 30 minutes */
+                    if (!last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))) {
+
                         // If it is, we now combine this input and the last input
                         int current_puffs = rs.getInt("no_of_puffs");
                         int new_puff_no = current_puffs + this.puffs_taken;
+
+                    /* Changing the number of puffs taken in the table for the current use */
+
                         s.executeUpdate("UPDATE use_data SET no_of_puffs = " + new_puff_no + " WHERE id = " + last_id + ";");
                     } else {
                         // Inputting the current use
@@ -145,29 +141,5 @@ public class Inhaler {
     }
 }
 
-/* Creating a tables - input this into your query console
-
-        create table inhalers(
-        id serial primary key,
-        inhaler_type varchar(128) NOT NULL,
-        expiry_date varchar(128) NOT NULL,
-        quantity int NOT NULL
-        );
-
-        create table use_data(
-        id serial primary key,
-        use_date DATE NOT NULL DEFAULT CURRENT_DATE,
-        no_of_puffs int NOT NULL
-        );
-
-   /* Table reset
-   TRUNCATE TABLE use_data;
-
-insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '9',3);
-insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '7',2);
-insert into use_data(use_date,no_of_puffs) values(CURRENT_DATE - integer '5',1);
-
-TRUNCATE TABLE inhalers;
- */
 
 
