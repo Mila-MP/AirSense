@@ -138,9 +138,7 @@ public class GetBarChart {
                 createDataset(),
                 PlotOrientation.VERTICAL,
                 true, true, false);
-
         ChartPanel cp = new ChartPanel(chart);
-        cp.setPreferredSize(new Dimension(800,400));
         return cp;
     }
 }

@@ -5,13 +5,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Inhaler {
-
     public String inhaler_expiry;
     public String inhaler_name;
     public int puffs_left;
     public int puffs_taken;
     public int usage_count;
-
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
@@ -20,8 +18,6 @@ public class Inhaler {
         this.inhaler_name = inhaler_name;
         this.inhaler_expiry = expiry;
         this.puffs_left = quantity;
-
-
     }
 
     public void add_inhaler() throws ClassNotFoundException, SQLException {
@@ -75,10 +71,6 @@ public class Inhaler {
         }
         return warning;
     }
-
-
-
-
 
     public void use_input(int puffs_taken) throws Exception {
         /* The aim of this function is to input the uses of the user
@@ -145,7 +137,7 @@ public class Inhaler {
                     /* Checking if the current input is within 30 minutes */
                     System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
                     System.out.println("Here we are checking if we should group  the inputs together");
-                    if (!last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))) {
+                    if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))==false) {
                         // If it is, we now combine this input and the last input
                         System.out.println("We are combining the inputs");
                         System.out.println(last_id);

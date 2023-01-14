@@ -1,8 +1,6 @@
-
 import AirSenseUI.UI;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
 import javax.swing.*;
-
 
 public class Main {
 

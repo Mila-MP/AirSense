@@ -1,8 +1,8 @@
 package AirSenseUI;
+
 import GetData.GetAdvice;
 import GetData.GetLocalAuthorities;
 import GetData.GetPollutionIndex;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The PollutionIndex class provides the user interface for the Pollution Index tab.
+ */
 public class PollutionIndex extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
     JLabel empty1 = new JLabel(convertToMultiline("\n"));
@@ -31,78 +34,41 @@ public class PollutionIndex extends JPanel{
 
 
     public PollutionIndex() throws IOException {
-        // ComboBox Initialisation
-        GetLocalAuthorities la = new GetLocalAuthorities();
-        String str = la.print();
-        String[] choices = str.split("\n");
-        JComboBox<String> boroughsCB = new JComboBox<>(choices);
+        // Combo Boxes Initialisation
+        GetLocalAuthorities boroughs = new GetLocalAuthorities();
+        String boroughString = boroughs.print();
+        String[] boroughList = boroughString.split("\n");
+        JComboBox<String> boroughsCB = new JComboBox<>(boroughList);
         JComboBox<String> sitesCB= new JComboBox<>();
 
-        // Panels
+        // Sub-panels configuration
         boroughPanel.setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        boroughPanel.add(boroughLabel,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        boroughPanel.add(boroughsCB, gbc);
+        gbc.gridx = 0; gbc.gridy = 0; boroughPanel.add(boroughLabel,gbc);
+        gbc.gridx = 1; gbc.gridy = 0; boroughPanel.add(boroughsCB, gbc);
 
         sitePanel.setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        sitePanel.add(siteLabel);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        sitePanel.add(sitesCB);
+        gbc.gridx = 0; gbc.gridy = 0; sitePanel.add(siteLabel);
+        gbc.gridx = 1; gbc.gridy = 0; sitePanel.add(sitesCB);
 
+        // Font configuration
         welcome.setFont(title);
         choose.setFont(body);
         info.setFont(body);
 
+        // Main panel configuration
         setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(welcome,gbc);
+        gbc.gridx = 0; gbc.gridy = 0; add(welcome,gbc);
+        gbc.gridx = 0; gbc.gridy = 1; add(empty1,gbc);
+        gbc.gridx = 0; gbc.gridy = 2; add(choose,gbc);
+        gbc.gridx = 0; gbc.gridy = 3; add(empty2,gbc);
+        gbc.gridx = 0; gbc.gridy = 4; add(boroughPanel,gbc);
+        gbc.gridx = 0; gbc.gridy = 5; add(sitePanel,gbc);
+        gbc.gridx = 0; gbc.gridy = 6; add(clearButton,gbc);
+        gbc.gridx = 0; gbc.gridy = 7; add(empty3,gbc);
+        gbc.gridx = 0; gbc.gridy = 8; add(info,gbc);
+        gbc.gridx = 0; gbc.gridy = 9; add(warning,gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(empty1,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(choose,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        add(empty2,gbc);
-
-
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        add(boroughPanel,gbc);
-
-
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        add(sitePanel,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        add(clearButton,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        add(empty3,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 8;
-        add(info,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        add(warning,gbc);
-
+        // Buttons/Combo boxes Configuration
         boroughsCB.addActionListener(e -> {
             int boroughID = boroughsCB.getSelectedIndex()+1;
             try {
@@ -149,8 +115,10 @@ public class PollutionIndex extends JPanel{
         });
 
     }
+
     public static String convertToMultiline(String orig)
     {
         return "<html>" + orig.replaceAll("\n", "<br>");
+        // Find link for code
     }
 }
