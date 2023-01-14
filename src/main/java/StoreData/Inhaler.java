@@ -108,6 +108,7 @@ public class Inhaler {
             // Selecting the latest use
             ResultSet rs = s.executeQuery("select * from use_data ORDER BY use_date DESC LIMIT 1");
 
+
             // Empty database check
             ResultSet rs_empty = s.executeQuery("SELECT count(*) FROM use_data");
             rs_empty.next();

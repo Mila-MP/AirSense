@@ -13,8 +13,8 @@ import java.time.Period;
 public class MyInhalers extends JPanel{
 
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
-    // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
     public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
+
     JButton refresh = new JButton("Refresh Inhaler data");
     JTextField inhaler_name = new JTextField("inhaler name");
     JTextField quantity_input = new JTextField();
