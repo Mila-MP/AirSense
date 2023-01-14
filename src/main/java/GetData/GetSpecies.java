@@ -11,7 +11,6 @@ import java.net.URL;
 
 public class GetSpecies {
     String responseBody;
-
     public GetSpecies() throws IOException {
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/Species/Json");
         // Establish connection

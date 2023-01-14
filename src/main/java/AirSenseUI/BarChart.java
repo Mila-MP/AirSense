@@ -111,7 +111,11 @@ public class BarChart extends JPanel{
         showButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                showChart();
+                try {
+                    showChart();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -126,7 +130,7 @@ public class BarChart extends JPanel{
     /**
      * The showChart method adds the plot to the UI.
      */
-    protected void showChart(){
+    protected void showChart() throws IOException {
         try {
             String year = (String) yearsCB.getSelectedItem();
             String site = (String) sitesCB.getSelectedItem();

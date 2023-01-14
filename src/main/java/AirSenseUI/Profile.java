@@ -30,39 +30,17 @@ public class Profile extends JPanel {
         boroughs = new JComboBox<>(choices);
 
         setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(nameLabel,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        add(nameField,gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(relieverLabel,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        add(relieverField,gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(ageLabel,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        add(ageField,gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        add(genderLabel,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        add(genderField,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        add(InsertButton,gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        add(locLabel,gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        add(boroughs,gbc);
+        gbc.gridx = 0; gbc.gridy = 0; add(nameLabel,gbc);
+        gbc.gridx = 1; gbc.gridy = 0; add(nameField,gbc);
+        gbc.gridx = 0; gbc.gridy = 1; add(relieverLabel,gbc);
+        gbc.gridx = 1; gbc.gridy = 1; add(relieverField,gbc);
+        gbc.gridx = 0; gbc.gridy = 2; add(ageLabel,gbc);
+        gbc.gridx = 1; gbc.gridy = 2; add(ageField,gbc);
+        gbc.gridx = 0; gbc.gridy = 3; add(genderLabel,gbc);
+        gbc.gridx = 1; gbc.gridy = 3; add(genderField,gbc);
+        gbc.gridx = 1; gbc.gridy = 4; add(InsertButton,gbc);
+        gbc.gridx = 0; gbc.gridy = 5; add(locLabel,gbc);
+        gbc.gridx = 1; gbc.gridy = 5; add(boroughs,gbc);
 
     }
     public void main(String[] args) {
@@ -72,8 +50,6 @@ public class Profile extends JPanel {
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO users_ " +
                     "VALUES ("+nameField+", "+relieverField+", "+ageField+", "+genderField+", "+locLabel+")");
-
-
             conn.close();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
