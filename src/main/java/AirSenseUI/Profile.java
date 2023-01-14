@@ -2,7 +2,6 @@ package AirSenseUI;
 
 import GetData.GetLocalAuthorities;
 import StoreData.Inhaler;
-import StoreData.Users;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
