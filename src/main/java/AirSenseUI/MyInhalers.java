@@ -12,9 +12,9 @@ public class MyInhalers extends JPanel{
     protected JTable inhaler_table;
     public int count;
     public boolean wait;
-    public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
+    public String dbUrl = "jdbc:postgresql://localhost:5433/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "AirSense");
     JButton refresh = new JButton("Refresh Inhaler data");
     JTextField inhaler_name = new JTextField("inhaler name");
     JLabel expiry_label = new JLabel("Expiry date");

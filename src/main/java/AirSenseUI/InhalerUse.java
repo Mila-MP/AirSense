@@ -11,10 +11,11 @@ public class InhalerUse extends JPanel {
     JPanel buttonPanel = new JPanel();
     JButton usedButton = new JButton("I just used my Inhaler");
     JButton refreshButton = new JButton("Refresh page");
-    JFrame f;
-    public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
+
+    public String dbUrl = "jdbc:postgresql://localhost:5433/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "AirSense");
+
 
     public InhalerUse() throws SQLException{
         JTable use_table = new JTable(refresh_model());
