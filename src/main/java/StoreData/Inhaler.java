@@ -12,7 +12,7 @@ public class Inhaler {
     public int usage_count;
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
@@ -44,17 +44,11 @@ public class Inhaler {
         usage_count = 0;
         while (rs.next()) {
             // Checking if date in table is 7 days before date it is currently
-            if (rs.getTimestamp("use_date").toLocalDateTime().isBefore(LocalDateTime.now().minus(Duration.ofDays(7))) == false) {
+            if (!rs.getTimestamp("use_date").toLocalDateTime().isBefore(LocalDateTime.now().minus(Duration.ofDays(7)))) {
                 usage_count = usage_count + 1;
             }
         }
-        System.out.println("The final usage count is:"+usage_count);
-        if (usage_count >= 3) {
-            return true;
-        } else {
-
-            return false;
-        }
+        return usage_count >= 3;
 
     }
     public Boolean quantity_warning() throws ClassNotFoundException, SQLException {
@@ -63,7 +57,7 @@ public class Inhaler {
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery("select * from use_data");
-        Boolean warning = false;
+        boolean warning = false;
         while(rs.next()){
             if(rs.getInt("quantity") < 25){
                 warning = true;
@@ -91,7 +85,6 @@ public class Inhaler {
         /* Need to change the date format, so we can group uses together */
         // Change to correct format
         LocalDateTime current_time = LocalDateTime.now();
-        LocalDateTime check_time = current_time.minusMinutes(30);
         System.out.println(current_time);
 
 
@@ -137,7 +130,7 @@ public class Inhaler {
                     /* Checking if the current input is within 30 minutes */
                     System.out.println(last_date.isBefore(temp_time.minus(Duration.ofMinutes(30))));
                     System.out.println("Here we are checking if we should group  the inputs together");
-                    if (last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))==false) {
+                    if (!last_date.isBefore(temp_time.minus(Duration.ofMinutes(30)))) {
                         // If it is, we now combine this input and the last input
                         System.out.println("We are combining the inputs");
                         System.out.println(last_id);

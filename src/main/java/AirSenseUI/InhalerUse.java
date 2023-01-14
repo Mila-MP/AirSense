@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 
 public class InhalerUse extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
@@ -13,7 +14,7 @@ public class InhalerUse extends JPanel {
     JButton refreshButton = new JButton("Refresh page");
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public InhalerUse() throws SQLException{
         JTable use_table = new JTable(refresh_model());
@@ -54,16 +55,12 @@ public class InhalerUse extends JPanel {
             Inhaler current;
             try {
                 current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
             try {
                 current.use_count();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
 
@@ -73,9 +70,7 @@ public class InhalerUse extends JPanel {
                 } else {
                     txt.setText("Thank you for your input");
                 }
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
 
@@ -91,19 +86,7 @@ public class InhalerUse extends JPanel {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-            try {
-                if (current.use_count()) {
-                    txt.setText("Based on NHS guidance you should contact your doctor");
-                } else {
-                    txt.setText("Thank you for your input");
-                }
 
-
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         });
         refreshButton.addActionListener(e -> {
             try {
@@ -127,7 +110,9 @@ public class InhalerUse extends JPanel {
 
         ResultSet rs2 = s.executeQuery(query2);
         while (rs2.next()) {
-            model.insertRow(0, new Object[]{rs2.getString("use_date"), rs2.getInt("no_of_puffs")});
+            // Adds each row in use_data table to the table model, use_date column is changed to an appropriate format
+            model.insertRow(0, new Object[]{rs2.getTimestamp("use_date").toLocalDateTime().format(
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), rs2.getInt("no_of_puffs")});
         }
         return model;
     }

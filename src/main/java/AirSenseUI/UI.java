@@ -19,7 +19,7 @@ public class UI extends JPanel{
 
 
     
-    public UI() throws IOException, SQLException{
+    public UI() throws IOException, SQLException, ClassNotFoundException {
         tabbedPane.addTab("Inhaler Use", inhalerUsePanel);
         tabbedPane.addTab("About AirSense",welcomePanel);
         tabbedPane.addTab("Profile",profilePanel);
