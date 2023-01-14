@@ -4,7 +4,13 @@ import GetData.GetHealthRisks;
 import GetData.GetSpecies;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+
+
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 /**
  * The GeneralInfo class provides the user interface for the General Info tab.
@@ -14,6 +20,7 @@ public class GeneralInfo extends JPanel {
     JLabel question = new JLabel("What do you want to know?");
     JButton clearButton = new JButton("Clear");
     JTextArea info = new JTextArea();
+    JLabel label1;
     
     public GeneralInfo() throws IOException {
 
@@ -68,9 +75,28 @@ public class GeneralInfo extends JPanel {
                         " we hope will help asthma sufferers in their day to day life.");
 
             } else if (question.equals(questions[3])) {
-                // Fill
+                BufferedImage image = null;
+                try {
+                    image = ImageIO.read(new File("src/main/java/AirSenseUI/PollutionBands.PNG"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                Image dimg = image.getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+                label1 = new JLabel(new ImageIcon(dimg));
+
+                gbc.gridx = 0;
+                gbc.gridy = 5;
+
+                add(label1,gbc);
+                label1.setVisible(true);
             } else if (question.equals(questions[4])){
-                // Fill
+                info.setSize(600, 500);
+                info.setVisible(true);
+                info.setText("To find out more about the pollution levels in London before today, you can" +
+                        "go to the 'Pollution History' tab. In it you will be able to select the year," +
+                        " borough, site and species of pollutant you desire to see, as well as having" +
+                        " the option to display said data as a Bar Chart or a Line Chart.  ");
+
             }
         });
         
@@ -134,6 +160,8 @@ public class GeneralInfo extends JPanel {
         clearButton.addActionListener(e -> {
             info.setVisible(false);
             speciesCB.setVisible(false);
+            label1.setVisible(false);
         });
+
     }
 }
