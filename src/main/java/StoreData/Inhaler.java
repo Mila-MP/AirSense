@@ -12,7 +12,7 @@ public class Inhaler {
     public int usage_count;
     public String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
     // NOTE!! Change the password based on what you set it yourself - I have not yet figured out how to store on Heroku
-    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "Il8S741v");
+    public Connection conn = DriverManager.getConnection(dbUrl, "postgres", "airsense");
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
