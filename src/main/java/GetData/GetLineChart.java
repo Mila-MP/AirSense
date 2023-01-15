@@ -111,18 +111,41 @@ public class GetLineChart {
                 measurementDate = obj2.getString("@MeasurementDateGMT");
                 monthNumber = measurementDate.substring(5, 7);
                 switch (Integer.parseInt(monthNumber)) {
-                    case 1 -> jan.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 2 -> feb.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 3 -> mar.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 4 -> apr.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 5 -> may.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 6 -> jun.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 7 -> jul.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 8 -> aug.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 9 -> sep.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 10 -> oct.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 11 -> nov.add(Double.parseDouble(obj2.getString("@Value")));
-                    case 12 -> dec.add(Double.parseDouble(obj2.getString("@Value")));
+                    case 1:
+                        jan.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 2:
+                        feb.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 3:
+                        mar.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 4:
+                        apr.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 5:
+                        may.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 6:
+                        jun.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 7:
+                        jul.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 8:
+                        aug.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 9:
+                        sep.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 10:
+                        oct.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 11:
+                        nov.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
+                    case 12: dec.add(Double.parseDouble(obj2.getString("@Value")));
+                        break;
                 }
             }
         }
