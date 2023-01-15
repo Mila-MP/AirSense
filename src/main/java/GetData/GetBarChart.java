@@ -44,6 +44,8 @@ public class GetBarChart {
         this.species = species;
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Annual/MonitoringReport/SiteCode=" + siteCode + "/Year=" + year + "/Json");
         // Establishes the connection
+        
+         /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.connect();
@@ -66,6 +68,7 @@ public class GetBarChart {
         }
         responseBody = sb.toString();
     }
+    /* end of reference 1*/
 
     /**
      * @return Dataset for the bar chart which will depend on
