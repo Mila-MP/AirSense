@@ -50,7 +50,7 @@ public class PollutionNews extends JPanel{
                 List<String> my_images = news2.extractImages(); //gets images from the news article
                 String content = news2.extractHTML(); //gets content from the news article
 
-                pane.setContentType("text/html");
+                pane.setContentType("text/html"); // use a jEditorPane because it facilitates html
                 pane.setText(content);
                 gbc.gridx=0; gbc.gridy=4; add(pane,gbc);
                 pane.setEditable(false);
@@ -58,7 +58,7 @@ public class PollutionNews extends JPanel{
                 // Get images
                 if (my_images.size() >0) {
                     try {
-                        image = new URL(my_images.get(0));
+                        image = new URL(my_images.get(0)); // we only want to display one image per article
                         im = new JLabel(new ImageIcon(image));
 
                         gbc.gridx = 0; gbc.gridy = 5; add(im, gbc);
@@ -75,13 +75,15 @@ public class PollutionNews extends JPanel{
         });
 
         // Hyperlinks
+        // when the user clicks on a hyperlink, they will be taken to the relevant web page
         pane.addHyperlinkListener(e1 -> {
             if(e1.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
-                // Removing the <br> from earlier formatting
+                // earlier formatting adds some <br> tags into the url
+                // this needs to be removed for the link to work
                 String edited_link = e1.getURL().toString().replace("<br>", "");
                 try{
                     URL link_url = new URL(edited_link);
-                    Desktop.getDesktop().browse(link_url.toURI());
+                    Desktop.getDesktop().browse(link_url.toURI()); //opens the web browser
 
                 } catch (IOException | URISyntaxException e) {
                     throw new RuntimeException(e);
