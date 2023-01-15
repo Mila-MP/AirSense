@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'war'
 
 }
 
@@ -14,6 +15,17 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+war{
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+    from {
+        // all of the library jar files used are to be zipped into the war file
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
