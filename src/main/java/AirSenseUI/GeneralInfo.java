@@ -84,9 +84,9 @@ public class GeneralInfo extends JPanel {
                 info.setText("All the data used in the app is taken from London Air" +
                         " (https://www.londonair.org.uk/LondonAir/Default.aspx), the website of the" +
                         " London Air Quality Network (LAQN). The network has pollution measuring sites" +
-                        " all throughout London. The measurement can then be accessed through London Air's" +
-                        " Application Programming Interface (API) and displayed in AirSense in a way that " +
-                        " we hope will help asthma sufferers in their day to day life.");
+                        " throughout London. The measurement can then be accessed through London Air's" +
+                        " Application Programming Interface (API) and displayed in AirSense in a way that" +
+                        " we hope will help asthma sufferers in their day-to-day life.");
 
             } else if (question.equals(questions[3])) {
                 info.setVisible(false);
