@@ -27,6 +27,7 @@ public class GetHealthRisks {
     public GetHealthRisks(String species) throws IOException {
         this.species = species;
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/Species/SpeciesCode="+species+"/Json");
+         /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
         // Establishes the connection
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
@@ -50,6 +51,7 @@ public class GetHealthRisks {
         }
         responseBody = sb.toString();
     }
+    /* end of reference 1*/
 
     /**
      * @return String containing the heath risk associated with the species
