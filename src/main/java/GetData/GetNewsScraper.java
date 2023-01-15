@@ -11,8 +11,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * The GetNewsScrapper class provides access to the news content on the
- * London Air website.
+ * The GetNewsScraper class uses jSoup to data scrape the London Air news articles.
+ * If the web page updates then so will our app, however this currently only works for articles before 2018.
  */
 public class GetNewsScraper{
     WebClient webclient = new WebClient();
@@ -42,7 +42,7 @@ public class GetNewsScraper{
         try{
             final Document document = Jsoup.connect(url).get();
             StringBuilder content = new StringBuilder();
-            Elements row = document.select("div.news-wrapper");
+            Elements row = document.select("div.news-wrapper"); // div.news-wrapper obtained from 'inspect' on web browser
             content.append(row);
             return formatting(content);
 
@@ -54,6 +54,8 @@ public class GetNewsScraper{
     }
 
     public String formatting (StringBuilder sb){
+        // the scraped text goes through two types of formatting
+        // so that the text won't run off the page (as it's prone to do with gridbaglayout)
         StringBuilder initial_format = formatString(sb, "<p>", '.');
         StringBuilder final_format = formatString(initial_format, "<br>", ',');
         return final_format.toString();
@@ -61,6 +63,13 @@ public class GetNewsScraper{
 
 
     public StringBuilder formatString(StringBuilder sb, String target, char punctuation ){
+        
+        // searches through the test looking for either full stops or commas
+        // if the gap between full stops or commas is too long (ie if the text runs off the page)
+        // add a <p> or <br> tag to make a new line.
+        // searching for commas/full stops ensures the new line will be at a natural point in the sentence
+        // and not in the middle of a word.
+        
         this.target = target;
         this.punctuation = punctuation;
         List<Integer> positions = new ArrayList<>();
@@ -90,6 +99,8 @@ public class GetNewsScraper{
                 }
             }
             if(punctuation == ','){
+                // this if statement takes into account sentences that are very long
+                // i.e. gap between full stops is so long that we need to look for commas instead.
                 if(difference > 290){
                     int mean = (upper+lower)/2;
                     int in = sb.indexOf(",",mean);
@@ -115,7 +126,9 @@ public class GetNewsScraper{
             final Document document= Jsoup.connect(url).get();
             Elements pic =document.select("img");
             if (pic.size() >= 3){
-                // removing images that aren't relevant
+                // There are images that consistently appear that we are not interested in displaying
+                // for example the Newsletter icon at the bottom of every page.
+                // so we remove images that aren't relevant (last two and first):
                 pic.remove(pic.size()-1);
                 pic.remove(pic.size()-1);
                 pic.remove(0);
