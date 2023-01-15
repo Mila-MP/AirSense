@@ -24,7 +24,8 @@ public class GetAdvice {
      * Pollution Index on which the advice provided depends.
      */
     int index; // Pollution index
-
+    
+     /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
     public GetAdvice(int index) throws IOException {
         this.index = index;
         String indexString = Integer.toString(index);
@@ -56,6 +57,7 @@ public class GetAdvice {
             responseBody = "";
         }
     }
+    /* end of reference 1*/
 
     /**
      *
