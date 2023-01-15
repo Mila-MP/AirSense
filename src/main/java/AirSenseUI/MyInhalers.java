@@ -38,7 +38,7 @@ public class MyInhalers extends JPanel{
         gbc.gridx = 0; gbc.gridy = 0; infoPanel.add(refreshButton,gbc);
         
         // Table first made when the app is started
-        tableMyInhalers.setModel(refresh_model());
+        tableMyInhalers.setModel(refreshModel());
         JScrollPane scrollPane = new JScrollPane(tableMyInhalers);
         tableMyInhalers.setFillsViewportHeight(true);
         setLayout(new GridLayout(1,2));
@@ -143,25 +143,6 @@ public class MyInhalers extends JPanel{
 
         return warning;
     }
-    public DefaultTableModel refresh_model() throws SQLException {
-        /* The purpose of this function is to refresh the table displayed on the UI. It does this by creating a new table model
-        which can then be assigned to the appropriate JTable
-         */
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Inhaler");
-        model.addColumn("Expiry date (yyyy-MM-dd)");
-        model.addColumn("Quantity");
-
-        Statement s = conn.createStatement();
-        String query2 = "SELECT * FROM inhalers";
-
-        ResultSet rs2 = s.executeQuery(query2);
-        while(rs2.next()){
-            model.insertRow(0, new Object[] {rs2.getString("inhaler_type"),rs2.getString("expiry_date"),rs2.getInt("quantity")});
-        }
-       return model;
-    }
-
 
     /**
      * The returnModel method refreshes the table displayed on the UI.
