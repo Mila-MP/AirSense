@@ -102,7 +102,7 @@ public class GeneralInfo extends JPanel {
                 info.setText("To find out more about the pollution levels in London before today, you can" +
                         "go to the 'Pollution History' tab. In it you will be able to select the year," +
                         " borough, site and species of pollutant you desire to see, as well as having" +
-                        " the option to display said data as a Bar Chart or a Line Chart.  ");
+                        " the option to display said data as a Bar Chart or a Line Chart.");
             }
         });
         
