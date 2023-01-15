@@ -20,6 +20,7 @@ public class GetSpecies {
     String responseBody;
     public GetSpecies() throws IOException {
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/Species/Json");
+         /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
         // Establishes the connection
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
@@ -43,6 +44,7 @@ public class GetSpecies {
         }
         responseBody = sb.toString();
     }
+    /* end of reference 1*/
 
     /**
      *
