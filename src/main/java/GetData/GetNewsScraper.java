@@ -10,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
 /**
  * The GetNewsScrapper class provides access to the news content on the
  * London Air website.
@@ -18,6 +17,9 @@ import org.jsoup.select.Elements;
 public class GetNewsScraper{
     WebClient webclient = new WebClient();
     HtmlPage page;
+    /**
+     * ID of the desired news article
+     */
     String ID;
     String target;
     char punctuation;

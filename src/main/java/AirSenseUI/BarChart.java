@@ -20,6 +20,7 @@ public class BarChart extends JPanel{
     JLabel boroughLabel = new JLabel("Borough: ");
     JLabel siteLabel = new JLabel("Site: ");
     JLabel speciesLabel = new JLabel("Species: ");
+    JLabel loadingError = new JLabel("Chart could not be loaded");
     JPanel buttonPanel = new JPanel();
     JPanel yearPanel = new JPanel();
     JPanel boroughPanel = new JPanel();
@@ -134,6 +135,7 @@ public class BarChart extends JPanel{
         try {
             String year = (String) yearsCB.getSelectedItem();
             String site = (String) sitesCB.getSelectedItem();
+            assert site != null;
             String siteCode = site.substring(0, 3);
             String species = (String) speciesCB.getSelectedItem();
             String title = "Number of days in low, moderate and high bands \n in " + site.substring(4) +
@@ -145,21 +147,21 @@ public class BarChart extends JPanel{
             gbc.gridx = 0; gbc.gridy = 5; add(plotPanel,gbc);
 
             showButton.setEnabled(false);
-
+            remove(loadingError);
         }
-        catch(Exception e2){}
+        catch(Exception e){
+            gbc.gridx = 0; gbc.gridy = 5; add(loadingError,gbc);
+        }
     }
 
     /**
      * The clearChart method removes the chart from the UI and resets the combo boxes.
      */
     protected void clearChart(){
-        try {
-            sitesCB.setModel(emptyModel);
-            speciesCB.setModel(emptyModel);
-            showButton.setEnabled(true);
-            remove(plotPanel);
-        }
-        catch(Exception e3){}
+        sitesCB.setModel(emptyModel);
+        speciesCB.setModel(emptyModel);
+        showButton.setEnabled(true);
+        remove(plotPanel);
+        remove(loadingError);
     }
 }

@@ -166,7 +166,6 @@ public class MyInhalers extends JPanel{
     /**
      * The returnModel method refreshes the table displayed on the UI.
      * @return refreshed table model
-     * @throws SQLException
      */
     public DefaultTableModel refreshModel() throws SQLException {
         DefaultTableModel model = new DefaultTableModel();
@@ -186,7 +185,6 @@ public class MyInhalers extends JPanel{
 
     /**
      * The emptyTableCheck method check if the table is empty.
-     * @throws SQLException
      */
     public void emptyTableCheck() throws SQLException {
         // If inhalers is empty
@@ -214,7 +212,6 @@ public class MyInhalers extends JPanel{
 
     /**
      * The deleteInhalerProfile method deletes the inhaler in the table.
-     * @throws SQLException
      */
     public void deleteInhalerProfile() throws SQLException {
         Statement s = conn.createStatement();

@@ -64,20 +64,9 @@ public class InhalerUse extends JPanel {
             Inhaler current;
             try {
                 current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
-
-            } catch (SQLException ex) {
-                JFrame f=new JFrame();
-                JOptionPane.showMessageDialog(f,"You Haven't Logged An Inhaler Yet.","Alert",JOptionPane.WARNING_MESSAGE);
-
-                System.out.println("Yes");
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            try {
-                current.use_count();
-            } catch (SQLException | ClassNotFoundException ex) {
+                current.use_input(1);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "You Haven't Logged An Inhaler Yet.", "Alert", JOptionPane.WARNING_MESSAGE);
                 throw new RuntimeException(ex);
             }
 
@@ -88,7 +77,6 @@ public class InhalerUse extends JPanel {
                     txt.setText("Thank you for your input");
                 }
             } catch (SQLException | ClassNotFoundException ex) {
-
                 throw new RuntimeException(ex);
             }
 
@@ -97,12 +85,6 @@ public class InhalerUse extends JPanel {
                     JOptionPane.showMessageDialog(null,"Your inhaler has less than 25 doses left","Warning",JOptionPane.WARNING_MESSAGE);
                 }
             } catch (ClassNotFoundException | SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            try {
-                current.use_input(1);
-            } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
 
@@ -127,7 +109,6 @@ public class InhalerUse extends JPanel {
     /**
      * The method refreshModel refreshes the table displayed on the UI.
      * @return table model
-     * @throws SQLException
      */
     public DefaultTableModel refreshModel() throws SQLException {
         DefaultTableModel model = new DefaultTableModel();

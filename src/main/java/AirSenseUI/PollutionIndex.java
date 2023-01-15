@@ -4,6 +4,8 @@ import GetData.GetAdvice;
 import GetData.GetLocalAuthorities;
 import GetData.GetPollutionIndex;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -20,6 +22,7 @@ public class PollutionIndex extends JPanel{
     JLabel empty1 = new JLabel(convertToMultiline("\n"));
     JLabel empty2 = new JLabel(convertToMultiline("\n"));
     JLabel empty3 = new JLabel(convertToMultiline("\n"));
+    JLabel empty4 = new JLabel(convertToMultiline("\n"));
     JLabel welcome = new JLabel("On this page, you can find out the pollution levels in the areas you want to visit");
     JLabel choose = new JLabel("Choose a Borough and a measurement site to see the pollution levels at that location.");
     JLabel boroughLabel = new JLabel("Borough:");
@@ -31,6 +34,9 @@ public class PollutionIndex extends JPanel{
     JButton clearButton = new JButton("Clear");
     Font title = new Font("Ubuntu",Font.PLAIN,15);
     Font body = new Font("Ubuntu", Font.PLAIN,13);
+    Border greenBorder = new LineBorder(Color.green);
+    Border orangeBorder = new LineBorder(Color.orange);
+    Border redBorder = new LineBorder(Color.red);
 
 
     public PollutionIndex() throws IOException {
@@ -53,20 +59,25 @@ public class PollutionIndex extends JPanel{
         // Font configuration
         welcome.setFont(title);
         choose.setFont(body);
-        info.setFont(body);
+        boroughLabel.setFont(body);
+        siteLabel.setFont(body);
+        info.setFont(title);
+        warning.setFont(title);
 
         // Main panel configuration
         setLayout(new GridBagLayout());
-        gbc.gridx = 0; gbc.gridy = 0; add(welcome,gbc);
-        gbc.gridx = 0; gbc.gridy = 1; add(empty1,gbc);
-        gbc.gridx = 0; gbc.gridy = 2; add(choose,gbc);
-        gbc.gridx = 0; gbc.gridy = 3; add(empty2,gbc);
-        gbc.gridx = 0; gbc.gridy = 4; add(boroughPanel,gbc);
-        gbc.gridx = 0; gbc.gridy = 5; add(sitePanel,gbc);
-        gbc.gridx = 0; gbc.gridy = 6; add(clearButton,gbc);
-        gbc.gridx = 0; gbc.gridy = 7; add(empty3,gbc);
-        gbc.gridx = 0; gbc.gridy = 8; add(info,gbc);
-        gbc.gridx = 0; gbc.gridy = 9; add(warning,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0; add(welcome,gbc);
+        gbc.gridy = 1; add(empty1,gbc);
+        gbc.gridy = 2; add(choose,gbc);
+        gbc.gridy = 3; add(empty2,gbc);
+        gbc.gridy = 4; add(boroughPanel,gbc);
+        gbc.gridy = 5; add(sitePanel,gbc);
+        gbc.gridy = 6; add(clearButton,gbc);
+        gbc.gridy = 7; add(empty3,gbc);
+        gbc.gridy = 8; add(info,gbc);
+        gbc.gridy = 9; add(empty4, gbc);
+        gbc.gridy = 10; add(warning,gbc);
 
         // Buttons/Combo boxes Configuration
         boroughsCB.addActionListener(e -> {
@@ -99,6 +110,14 @@ public class PollutionIndex extends JPanel{
                 int maxIndex = Collections.max(indexList);
                 GetAdvice advice = new GetAdvice(maxIndex);
                 warning.setText(advice.print());
+                if (maxIndex <= 3){
+                    warning.setBorder(greenBorder);
+                } else if (maxIndex <= 6) {
+                    warning.setBorder(orangeBorder);
+                }
+                else{
+                    warning.setBorder(redBorder);
+                }
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);

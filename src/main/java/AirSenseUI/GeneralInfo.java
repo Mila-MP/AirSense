@@ -20,7 +20,7 @@ public class GeneralInfo extends JPanel {
     JLabel question = new JLabel("What do you want to know?");
     JButton clearButton = new JButton("Clear");
     JTextArea info = new JTextArea();
-    JLabel label1;
+    JLabel imageLabel;
     
     public GeneralInfo() throws IOException {
 
@@ -35,6 +35,16 @@ public class GeneralInfo extends JPanel {
         String speciesString = species.print();
         String[] speciesList = speciesString.split("\n");
         JComboBox<String> speciesCB = new JComboBox<>(speciesList);
+
+        // Image Initialisation
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File("src/main/java/Images/PollutionBands.PNG"));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        Image img = image.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+        imageLabel = new JLabel(new ImageIcon(img));
 
         // Text area configuration
         info.setEditable(false);
@@ -54,17 +64,21 @@ public class GeneralInfo extends JPanel {
             String question = questionsCB.getItemAt(questionsCB.getSelectedIndex());
 
             if (question.equals(questions[0])) {
-                info.setSize(200, 200);
+                imageLabel.setVisible(false);
                 speciesCB.setVisible(false);
+                info.setSize(200, 200);
                 info.setVisible(true);
                 info.setText(speciesString);
 
             } else if (question.equals(questions[1])) {
+                imageLabel.setVisible(false);
                 info.setVisible(false);
                 info.setSize(500, 500);
                 speciesCB.setVisible(true);
 
             } else if (question.equals(questions[2])) {
+                imageLabel.setVisible(false);
+                speciesCB.setVisible(false);
                 info.setSize(600, 500);
                 info.setVisible(true);
                 info.setText("All the data used in the app is taken from London Air" +
@@ -75,28 +89,20 @@ public class GeneralInfo extends JPanel {
                         " we hope will help asthma sufferers in their day to day life.");
 
             } else if (question.equals(questions[3])) {
-                BufferedImage image = null;
-                try {
-                    image = ImageIO.read(new File("src/main/java/AirSenseUI/PollutionBands.PNG"));
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                Image dimg = image.getScaledInstance(800, 500, Image.SCALE_SMOOTH);
-                label1 = new JLabel(new ImageIcon(dimg));
+                info.setVisible(false);
+                speciesCB.setVisible(false);
+                gbc.gridx = 0; gbc.gridy = 5; add(imageLabel,gbc);
+                imageLabel.setVisible(true);
 
-                gbc.gridx = 0;
-                gbc.gridy = 5;
-
-                add(label1,gbc);
-                label1.setVisible(true);
             } else if (question.equals(questions[4])){
+                speciesCB.setVisible(false);
+                imageLabel.setVisible(false);
                 info.setSize(600, 500);
                 info.setVisible(true);
                 info.setText("To find out more about the pollution levels in London before today, you can" +
                         "go to the 'Pollution History' tab. In it you will be able to select the year," +
                         " borough, site and species of pollutant you desire to see, as well as having" +
                         " the option to display said data as a Bar Chart or a Line Chart.  ");
-
             }
         });
         
@@ -160,7 +166,7 @@ public class GeneralInfo extends JPanel {
         clearButton.addActionListener(e -> {
             info.setVisible(false);
             speciesCB.setVisible(false);
-            label1.setVisible(false);
+            imageLabel.setVisible(false);
         });
 
     }

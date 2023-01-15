@@ -15,6 +15,7 @@ public class LineChart extends BarChart {
     protected void showChart() throws IOException {
         String year = (String) yearsCB.getSelectedItem();
         String site = (String) sitesCB.getSelectedItem();
+        assert site != null;
         String siteCode = site.substring(0, 3);
         String species = (String) speciesCB.getSelectedItem();
         String title = species + " concentration in " + site.substring(4) + " (" + year + ")";
