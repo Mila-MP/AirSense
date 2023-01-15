@@ -23,8 +23,9 @@ public class GeneralInfo extends JPanel {
     
     public GeneralInfo() throws IOException {
         GridBagConstraints gbc = new GridBagConstraints();
-
         gbc.insets = new Insets(10, 0, 10, 0); // top, left, bottom, right
+
+        question.setFont(new Font("Arial", Font.BOLD, 20));
 
         // Combo box Configuration
         String[] questions = {"What are the different types of pollutant measured?",
