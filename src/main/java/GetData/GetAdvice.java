@@ -23,13 +23,13 @@ public class GetAdvice {
     /**
      * Pollution Index on which the advice provided depends.
      */
-    int index; // Pollution index
-    
-     
+    int index;
+
     public GetAdvice(int index) throws IOException {
         this.index = index;
         String indexString = Integer.toString(index);
-        URL url = new URL("https://api.erg.ic.ac.uk/AirQuality/Information/IndexHealthAdvice/AirQualityIndex="+indexString+"/Json");
+        URL url = new URL("https://api.erg.ic.ac.uk/AirQuality/Information/IndexHealthAdvice/AirQualityIndex="+
+                indexString+"/Json");
         /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
         // Establishes the connection
         HttpURLConnection request = (HttpURLConnection) url.openConnection();

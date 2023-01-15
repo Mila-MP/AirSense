@@ -46,7 +46,8 @@ public class GetNewsScraper{
         try{
             final Document document = Jsoup.connect(url).get();
             StringBuilder content = new StringBuilder();
-            Elements row = document.select("div.news-wrapper"); // div.news-wrapper obtained from 'inspect' on web browser
+            // div.news-wrapper obtained from 'inspect' on web browser
+            Elements row = document.select("div.news-wrapper");
             content.append(row);
             return formatting(content);
 
@@ -59,7 +60,7 @@ public class GetNewsScraper{
     
 
     public String formatting (StringBuilder sb){
-        // the scraped text goes through two types of formatting
+        // The scraped text goes through two types of formatting
         // so that the text won't run off the page (as it's prone to do with gridbaglayout)
         StringBuilder initial_format = formatString(sb, "<p>", '.');
         StringBuilder final_format = formatString(initial_format, "<br>", ',');
@@ -69,10 +70,10 @@ public class GetNewsScraper{
 
     public StringBuilder formatString(StringBuilder sb, String target, char punctuation ){
         
-        // searches through the test looking for either full stops or commas
+        // Searches through the test looking for either full stops or commas
         // if the gap between full stops or commas is too long (ie if the text runs off the page)
         // add a <p> or <br> tag to make a new line.
-        // searching for commas/full stops ensures the new line will be at a natural point in the sentence
+        // Searching for commas/full stops ensures the new line will be at a natural point in the sentence
         // and not in the middle of a word.
         
         this.target = target;
@@ -104,7 +105,7 @@ public class GetNewsScraper{
                 }
             }
             if(punctuation == ','){
-                // this if statement takes into account sentences that are very long
+                // This if statement takes into account sentences that are very long
                 // i.e. gap between full stops is so long that we need to look for commas instead.
                 if(difference > 290){
                     int mean = (upper+lower)/2;
@@ -114,7 +115,7 @@ public class GetNewsScraper{
             }
         }
 
-        // removes image so it's not displayed twice
+        // Removes image so it's not displayed twice
         int in = sb.indexOf("!important;");
         if (in != -1){
             return sb.delete(0,in+13);

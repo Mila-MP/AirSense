@@ -74,11 +74,10 @@ public class PollutionNews extends JPanel{
             }
         });
 
-        // Hyperlinks
-        // when the user clicks on a hyperlink, they will be taken to the relevant web page
+        // When the user clicks on a hyperlink, they will be taken to the relevant web page
         pane.addHyperlinkListener(e1 -> {
             if(e1.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
-                // earlier formatting adds some <br> tags into the url
+                // Earlier formatting adds some <br> tags into the url
                 // this needs to be removed for the link to work
                 String edited_link = e1.getURL().toString().replace("<br>", "");
                 try{

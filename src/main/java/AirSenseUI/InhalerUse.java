@@ -17,7 +17,9 @@ public class InhalerUse extends JPanel {
     JButton refreshButton = new JButton("Refresh page");
     JLabel txt = new JLabel();
     public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
-    public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
+    public Connection conn = DriverManager.getConnection(dbUrl,
+            "orexdsnjebnlrh",
+            "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
 
     public InhalerUse() throws SQLException{
         // Table initialisation
@@ -63,16 +65,24 @@ public class InhalerUse extends JPanel {
 
             Inhaler current;
             try {
-                current = new Inhaler(rs2.getString("inhaler_type"), rs2.getString("expiry_date"), rs2.getInt("quantity"));
+                current = new Inhaler(rs2.getString("inhaler_type"),
+                        rs2.getString("expiry_date"),
+                        rs2.getInt("quantity"));
                 current.use_input(1);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "You Haven't Logged An Inhaler Yet.", "Alert", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "You Haven't Logged An Inhaler Yet.",
+                        "Alert",
+                        JOptionPane.WARNING_MESSAGE);
                 throw new RuntimeException(ex);
             }
 
             try {
                 if (current.use_count()) {
-                    JOptionPane.showMessageDialog(null,"Based on NHS guidance you should contact your doctor","Warning",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "Based on NHS guidance you should contact your doctor",
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
                 } else {
                     txt.setText("Thank you for your input");
                 }
@@ -82,7 +92,10 @@ public class InhalerUse extends JPanel {
 
             try {
                 if (current.quantity_warning()){
-                    JOptionPane.showMessageDialog(null,"Your inhaler has less than 25 doses left","Warning",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "Your inhaler has less than 25 doses left",
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             } catch (ClassNotFoundException | SQLException ex) {
                 throw new RuntimeException(ex);
@@ -120,9 +133,12 @@ public class InhalerUse extends JPanel {
 
         ResultSet rs2 = s.executeQuery(query2);
         while (rs2.next()) {
-            // Adds each row in use_data table to the table model, use_date column is changed to an appropriate format
-            model.insertRow(0, new Object[]{rs2.getTimestamp("use_date").toLocalDateTime().format(
-                    DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), rs2.getInt("no_of_puffs")});
+            // Adds each row in use_data table to the table model,
+            // use_date column is changed to an appropriate format
+            model.insertRow(0,
+                    new Object[]{rs2.getTimestamp("use_date").toLocalDateTime().format(
+                            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                            rs2.getInt("no_of_puffs")});
         }
         return model;
     }

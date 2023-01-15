@@ -30,7 +30,8 @@ public class GetPollutionIndex {
     public GetPollutionIndex(int localAuthorityID) throws IOException {
         this.localAuthorityID = localAuthorityID;
 
-        URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/LocalAuthorityId=" + localAuthorityID + "/Json");
+        URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/LocalAuthorityId=" +
+                localAuthorityID + "/Json");
          /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
         // Establishes the connection
         HttpURLConnection request = (HttpURLConnection) url.openConnection();

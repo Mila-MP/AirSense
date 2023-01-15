@@ -23,8 +23,10 @@ public class PollutionIndex extends JPanel{
     JLabel empty2 = new JLabel(convertToMultiline("\n"));
     JLabel empty3 = new JLabel(convertToMultiline("\n"));
     JLabel empty4 = new JLabel(convertToMultiline("\n"));
-    JLabel welcome = new JLabel("On this page, you can find out the pollution levels in the areas you want to visit");
-    JLabel choose = new JLabel("Choose a Borough and a measurement site to see the pollution levels at that location.");
+    JLabel welcome = new JLabel("On this page, you can find out the pollution" +
+            " levels in the areas you want to visit");
+    JLabel choose = new JLabel("Choose a Borough and a measurement site to see" +
+            " the pollution levels at that location.");
     JLabel boroughLabel = new JLabel("Borough:");
     JLabel siteLabel = new JLabel("Measurement site:");
     JLabel info = new JLabel();
@@ -135,7 +137,7 @@ public class PollutionIndex extends JPanel{
 
     }
 
-    /* Reference 2 - taken from https://stackoverflow.com/questions/2152742/java-swing-multiline-labels */
+    /* Reference 4 - taken from https://stackoverflow.com/questions/2152742/java-swing-multiline-labels */
     /**
      * @param orig String
      * @return String with \n replaced with <br>
@@ -145,4 +147,5 @@ public class PollutionIndex extends JPanel{
         return "<html>" + orig.replaceAll("\n", "<br>");
 
     }
+    /* End of reference 4*/
 }

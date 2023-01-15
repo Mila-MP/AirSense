@@ -18,8 +18,7 @@ import java.util.List;
 public class GetNews {
     String responseBody;
     int index;
-    
-    
+
     public GetNews() throws IOException {
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/News/Skip=2/limit=20/Json");
         /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */

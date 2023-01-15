@@ -11,7 +11,9 @@ public class Inhaler {
     public int puffs_taken;
     public int usage_count;
     public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
-    public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
+    public Connection conn = DriverManager.getConnection(dbUrl,
+            "orexdsnjebnlrh",
+            "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
 
     public Inhaler(String inhaler_name, String expiry, int quantity) throws SQLException, ClassNotFoundException {
         this.inhaler_name = inhaler_name;
@@ -22,8 +24,6 @@ public class Inhaler {
     /**
      * The aim of this function is to add an inhaler to the database
      * The add_inhaler method adds an inhaler to the database.
-     * @throws ClassNotFoundException
-     * @throws SQLException
      */
     public void add_inhaler() throws ClassNotFoundException, SQLException {
         // Registering the driver
@@ -55,15 +55,13 @@ public class Inhaler {
     /**
      *
      * @return true if the quantity of inhaler is below 25, false otherwise.
-     * @throws ClassNotFoundException
-     * @throws SQLException
      */
     public Boolean quantity_warning() throws ClassNotFoundException, SQLException {
         // Retrieving the data values
         Class.forName("org.postgresql.Driver");
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery("select * from inhalers");
-        Boolean warning = false;
+        boolean warning = false;
         while(rs.next()){
             if(rs.getInt("quantity") < 25){
                 warning = true;
@@ -78,7 +76,7 @@ public class Inhaler {
      *   current input to the last input
      * @param puffs_taken no_of_puffs - which defaults to 1
      */
-    public void use_input(int puffs_taken) throws Exception {
+    public void use_input(int puffs_taken){
         this.puffs_taken = puffs_taken;
 
         // Change date to correct format

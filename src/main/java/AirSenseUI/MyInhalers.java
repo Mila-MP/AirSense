@@ -16,7 +16,9 @@ import java.time.Period;
 public class MyInhalers extends JPanel{
 
     public String dbUrl = "jdbc:postgresql://ec2-3-229-161-70.compute-1.amazonaws.com:5432/d4fdh0dvfc4v3r";
-    public Connection conn = DriverManager.getConnection(dbUrl, "orexdsnjebnlrh", "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
+    public Connection conn = DriverManager.getConnection(dbUrl,
+            "orexdsnjebnlrh",
+            "684b6442280ff5e797fcf680b5be53d48a0df862c38694dd7d14c7b6c4c3ccd0");
     JButton refreshButton = new JButton("Refresh Inhaler data");
     JButton addInhalerButton = new JButton("Add inhaler");
     public JButton deleteInhalerButton = new JButton("Delete current Inhaler");
@@ -47,16 +49,19 @@ public class MyInhalers extends JPanel{
 
 
         if (expiry_warning()){
-            JOptionPane.showMessageDialog(null,"You inhaler is about to expire, please get another one","Alert",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "You inhaler is about to expire, please get another one",
+                    "Alert",
+                    JOptionPane.WARNING_MESSAGE);
         }
 
         emptyTableCheck();
 
-        /* Reference 1 - taken from https://www.tutorialspoint.com/how-can-we-make-jtextfield-accept-only-numbers-in-java */
+        /* Reference 3 - taken from https://www.tutorialspoint.com/how-can-we-make-jtextfield-accept-only-numbers-in-java */
         quantityTF.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyCode() == 8 || ke.getKeyCode() == 46
-                        || ke.getKeyCode() == 37 || ke.getKeyCode() == 39) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyCode() == 8 ||
+                        ke.getKeyCode() == 46 || ke.getKeyCode() == 37 || ke.getKeyCode() == 39) {
                     quantityTF.setEditable(true);
                     digitsWarning.setText("");
                 }
@@ -66,6 +71,7 @@ public class MyInhalers extends JPanel{
                 }
             }
         });
+        /* End of reference 3*/
 
         refreshButton.addActionListener(e -> {
             try {
@@ -122,9 +128,7 @@ public class MyInhalers extends JPanel{
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-
         });
-
     }
 
     public Boolean expiry_warning() throws ClassNotFoundException, SQLException {
@@ -159,7 +163,9 @@ public class MyInhalers extends JPanel{
 
         ResultSet rs2 = s.executeQuery(query2);
         while(rs2.next()){
-            model.insertRow(0, new Object[] {rs2.getString("inhaler_type"),rs2.getString("expiry_date"),rs2.getInt("quantity")});
+            model.insertRow(0, new Object[] {rs2.getString("inhaler_type"),
+                    rs2.getString("expiry_date"),
+                    rs2.getInt("quantity")});
         }
        return model;
     }

@@ -43,7 +43,7 @@ public class WelcomePage extends JPanel {
         gbc.gridx = 0; gbc.gridy = 5; add(description,gbc);
     }
 
-    /* Reference 2 - taken from https://stackoverflow.com/questions/2152742/java-swing-multiline-labels */
+    /* Reference 4 - taken from https://stackoverflow.com/questions/2152742/java-swing-multiline-labels */
     /**
      * @param orig String
      * @return String with \n replaced with <br>
@@ -52,4 +52,5 @@ public class WelcomePage extends JPanel {
     {
         return "<html>" + orig.replaceAll("\n", "<br>");
     }
+    /* End of reference 4*/
 }
