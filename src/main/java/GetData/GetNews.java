@@ -18,7 +18,8 @@ import java.util.List;
 public class GetNews {
     String responseBody;
     int index;
-
+    
+    /* Reference 1: https://gist.github.com/Da9el00/e8b1c2e5185e51413d9acea81056c2f9 */
     public GetNews() throws IOException {
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/News/Skip=2/limit=20/Json");
         // Establishes the connection
@@ -44,6 +45,8 @@ public class GetNews {
         }
         responseBody = sb.toString();
     }
+    /* end of reference 1 */
+    
 
     /**
      * The getNewsTitle method extracts news article titles to be used to make the
