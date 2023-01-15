@@ -20,6 +20,7 @@ public class GetLocalAuthorities{
     String responseBody;
     public GetLocalAuthorities() throws IOException{
         URL url = new URL("http://api.erg.ic.ac.uk/AirQuality/Information/MonitoringLocalAuthority/GroupName=London/Json");
+         /* Reference 1: https://devtut.github.io/java/httpurlconnection.html#get-response-body-from-a-url-as-a-string */
         // Establishes the connection.
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
@@ -43,6 +44,7 @@ public class GetLocalAuthorities{
         }
         responseBody = sb.toString();
     }
+    /* end of reference 1*/
 
     /**
      * @return String containing a list of all the London Boroughs.
