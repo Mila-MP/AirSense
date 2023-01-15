@@ -14,6 +14,8 @@ import org.jsoup.select.Elements;
  * The GetNewsScraper class uses jSoup to data scrape the London Air news articles.
  * If the web page updates then so will our app, however this currently only works for articles before 2018.
  */
+
+/* reference 2: https://www.youtube.com/watch?v=QzOJnNXH0uU */
 public class GetNewsScraper{
     WebClient webclient = new WebClient();
     HtmlPage page;
@@ -36,7 +38,9 @@ public class GetNewsScraper{
         webclient.getOptions().setJavaScriptEnabled(false);
         return webclient.getPage(url);
     }
+    /* end of reference 2 */
 
+    
     public String extractHTML(){
         final String url = page.getUrl().toString();
         try{
@@ -52,6 +56,7 @@ public class GetNewsScraper{
             return "error";
         }
     }
+    
 
     public String formatting (StringBuilder sb){
         // the scraped text goes through two types of formatting
