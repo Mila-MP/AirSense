@@ -16,13 +16,16 @@ import javax.swing.JPanel;
  * The GeneralInfo class provides the user interface for the General Info tab.
  */
 public class GeneralInfo extends JPanel {
-    GridBagConstraints gbc = new GridBagConstraints();
     JLabel question = new JLabel("What do you want to know?");
     JButton clearButton = new JButton("Clear");
     JTextArea info = new JTextArea();
     JLabel imageLabel;
     
     public GeneralInfo() throws IOException {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 0, 10, 0); // top, left, bottom, right
+
+        question.setFont(new Font("Arial", Font.BOLD, 20));
 
         // Combo box Configuration
         String[] questions = {"What are the different types of pollutant measured?",
@@ -84,9 +87,9 @@ public class GeneralInfo extends JPanel {
                 info.setText("All the data used in the app is taken from London Air" +
                         " (https://www.londonair.org.uk/LondonAir/Default.aspx), the website of the" +
                         " London Air Quality Network (LAQN). The network has pollution measuring sites" +
-                        " all throughout London. The measurement can then be accessed through London Air's" +
-                        " Application Programming Interface (API) and displayed in AirSense in a way that " +
-                        " we hope will help asthma sufferers in their day to day life.");
+                        " throughout London. The measurement can then be accessed through London Air's" +
+                        " Application Programming Interface (API) and displayed in AirSense in a way that" +
+                        " we hope will help asthma sufferers in their day-to-day life.");
 
             } else if (question.equals(questions[3])) {
                 info.setVisible(false);
@@ -102,7 +105,7 @@ public class GeneralInfo extends JPanel {
                 info.setText("To find out more about the pollution levels in London before today, you can" +
                         "go to the 'Pollution History' tab. In it you will be able to select the year," +
                         " borough, site and species of pollutant you desire to see, as well as having" +
-                        " the option to display said data as a Bar Chart or a Line Chart.  ");
+                        " the option to display said data as a Bar Chart or a Line Chart.");
             }
         });
         

@@ -15,8 +15,8 @@ public class WelcomePage extends JPanel {
     JLabel empty2 = new JLabel(convertToMultiline("\n"));
     JLabel empty3 = new JLabel(convertToMultiline("\n\n\n"));
     Font title1 = new Font("Ubuntu", Font.BOLD,20);
-    Font title2 = new Font("Ubuntu",Font.PLAIN,15);
-    Font body = new Font("Ubuntu",Font.PLAIN,13);
+    Font title2 = new Font("Ubuntu",Font.PLAIN,16);
+    Font body = new Font("Ubuntu",Font.PLAIN,14);
 
     public WelcomePage(){
         welcome.setText("Welcome to AirSense");
