@@ -16,13 +16,15 @@ import javax.swing.JPanel;
  * The GeneralInfo class provides the user interface for the General Info tab.
  */
 public class GeneralInfo extends JPanel {
-    GridBagConstraints gbc = new GridBagConstraints();
     JLabel question = new JLabel("What do you want to know?");
     JButton clearButton = new JButton("Clear");
     JTextArea info = new JTextArea();
     JLabel imageLabel;
     
     public GeneralInfo() throws IOException {
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(10, 0, 10, 0); // top, left, bottom, right
 
         // Combo box Configuration
         String[] questions = {"What are the different types of pollutant measured?",
